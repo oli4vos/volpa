@@ -1,9 +1,12 @@
 (function () {
   const styles = [
-    // Voeg nieuwe designs hier toe, bijvoorbeeld:
-    // { id: "main3", name: "Concept 3", href: "assets/css/main3.css" }
     { id: "main", name: "Basis", href: "assets/css/main.css" },
-    { id: "main2", name: "Alternatief", href: "assets/css/main2.css" }
+    { id: "main2", name: "Alternatief", href: "assets/css/main2.css" },
+    { id: "main3", name: "Design 3", href: "assets/css/main3.css" },
+    { id: "main4", name: "Design 4", href: "assets/css/main4.css" },
+    { id: "main5", name: "Design 5", href: "assets/css/main5.css" },
+    { id: "main6", name: "Design 6", href: "assets/css/main6.css" },
+    { id: "main7", name: "Design 7", href: "assets/css/main7.css" }
   ];
   const storageKey = "volpa-active-style";
 
