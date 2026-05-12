@@ -182,6 +182,10 @@ function injectStyleSwitcherStyles() {
       right: 0;
       bottom: calc(100% + 10px);
       width: min(240px, calc(100vw - 32px));
+      max-height: min(68vh, 460px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
       padding: 12px;
       border-radius: 18px;
       border: 1px solid rgba(20, 24, 28, 0.12);
@@ -236,6 +240,10 @@ function injectStyleSwitcherStyles() {
       .style-switcher {
         right: 12px;
         bottom: calc(12px + env(safe-area-inset-bottom));
+      }
+
+      .style-switcher-panel {
+        max-height: min(64vh, 400px);
       }
 
       .style-switcher-trigger {
