@@ -11,7 +11,8 @@
     { id: "main4", name: "Design 4", href: new URL("main4.css", cssBaseUrl).href },
     { id: "main5", name: "Design 5", href: new URL("main5.css", cssBaseUrl).href },
     { id: "main6", name: "Design 6", href: new URL("main6.css", cssBaseUrl).href },
-    { id: "main7", name: "Design 7", href: new URL("main7.css", cssBaseUrl).href }
+    { id: "main7", name: "Design 7", href: new URL("main7.css", cssBaseUrl).href },
+    { id: "main8", name: "Design 8", href: new URL("main8.css", cssBaseUrl).href }
   ];
   const storageKey = "volpa-active-style";
 
