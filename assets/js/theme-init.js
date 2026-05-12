@@ -1,12 +1,17 @@
 (function () {
+  const scriptUrl = document.currentScript && document.currentScript.src
+    ? new URL(document.currentScript.src, window.location.href)
+    : new URL("assets/js/theme-init.js", window.location.href);
+  const cssBaseUrl = new URL("../css/", scriptUrl);
+
   const styles = [
-    { id: "main", name: "Basis", href: "assets/css/main.css" },
-    { id: "main2", name: "Alternatief", href: "assets/css/main2.css" },
-    { id: "main3", name: "Design 3", href: "assets/css/main3.css" },
-    { id: "main4", name: "Design 4", href: "assets/css/main4.css" },
-    { id: "main5", name: "Design 5", href: "assets/css/main5.css" },
-    { id: "main6", name: "Design 6", href: "assets/css/main6.css" },
-    { id: "main7", name: "Design 7", href: "assets/css/main7.css" }
+    { id: "main", name: "Basis", href: new URL("main.css", cssBaseUrl).href },
+    { id: "main2", name: "Alternatief", href: new URL("main2.css", cssBaseUrl).href },
+    { id: "main3", name: "Design 3", href: new URL("main3.css", cssBaseUrl).href },
+    { id: "main4", name: "Design 4", href: new URL("main4.css", cssBaseUrl).href },
+    { id: "main5", name: "Design 5", href: new URL("main5.css", cssBaseUrl).href },
+    { id: "main6", name: "Design 6", href: new URL("main6.css", cssBaseUrl).href },
+    { id: "main7", name: "Design 7", href: new URL("main7.css", cssBaseUrl).href }
   ];
   const storageKey = "volpa-active-style";
 

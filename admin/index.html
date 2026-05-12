@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Volpa Admin</title>
+<meta name="robots" content="noindex,nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="../assets/js/theme-init.js"></script>
+<noscript><link rel="stylesheet" href="../assets/css/main.css" /></noscript>
+<link rel="stylesheet" href="../assets/css/admin.css" />
+</head>
+<body class="admin-body">
+<main class="admin-shell">
+  <section class="admin-login" data-admin-login-screen>
+    <div class="admin-login-card">
+      <div class="admin-kicker">Volpa · Admin</div>
+      <h1>Beheer blogs en kerninformatie zonder direct in de broncode te werken.</h1>
+      <p>Dit paneel is voorlopig statisch. De login is daarom bewust simpel gehouden: een knop die het beheer opent. Publiceren gebeurt daarna via export en GitHub.</p>
+      <button type="button" class="btn btn-primary" data-admin-login>Open adminpaneel</button>
+      <p class="admin-login-note">Na inloggen kun je bloginhoud beheren en een nieuwe versie van <code>arnoud-data.js</code> genereren.</p>
+      <a href="../index.html" class="btn btn-ghost">Terug naar site</a>
+    </div>
+  </section>
+
+  <section class="admin-app" data-admin-app hidden>
+    <header class="admin-topbar">
+      <div>
+        <div class="admin-kicker">Volpa · Admin</div>
+        <h1>Beheercentrum</h1>
+        <p>Wijzig blogs en Arnoud-data, kopieer of download de bijgewerkte bestanden en publiceer daarna via GitHub.</p>
+      </div>
+      <div class="admin-topbar-actions">
+        <a href="../blog.html" class="btn btn-ghost">Bekijk blog</a>
+        <a href="../index.html" class="btn btn-ghost">Bekijk site</a>
+        <button type="button" class="btn btn-primary" data-admin-logout>Uitloggen</button>
+      </div>
+    </header>
+
+    <div class="admin-notice">
+      <strong>Belangrijk:</strong> dit paneel schrijft voorlopig niets direct naar GitHub. Je gebruikt het om bijgewerkte bestanden te genereren, te kopiëren of te downloaden. Daarna commit en push je die bestanden.
+    </div>
+
+    <section class="admin-section">
+      <div class="admin-section-head">
+        <div>
+          <div class="admin-kicker">Blogs</div>
+          <h2>Blogbeheer</h2>
+        </div>
+        <div class="admin-toolbar">
+          <button type="button" class="btn btn-ghost" data-admin-new-post>Nieuwe blog</button>
+          <button type="button" class="btn btn-primary" data-admin-save-post>Opslaan in lijst</button>
+          <button type="button" class="btn btn-ghost" data-admin-delete-post>Verwijder geselecteerde blog</button>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <aside class="admin-card admin-card-side">
+          <h3>Bestaande blogs</h3>
+          <p class="admin-card-copy">Kies een blog om hem te bewerken of maak een nieuw artikel aan.</p>
+          <div class="admin-post-list" data-admin-post-list></div>
+        </aside>
+
+        <div class="admin-card">
+          <div class="admin-card-head">
+            <h3 data-admin-post-editor-title>Nieuwe blog</h3>
+            <p class="admin-card-copy">Werk hier één blogartikel uit. De slug wordt automatisch bijgewerkt als je die leeg laat.</p>
+          </div>
+
+          <form class="admin-form" data-admin-post-form>
+            <div class="admin-form-row">
+              <label class="field">
+                <span>Titel</span>
+                <input type="text" name="title" placeholder="Bijvoorbeeld: Wat kost een scheiding echt?" />
+              </label>
+              <label class="field">
+                <span>Datum</span>
+                <input type="date" name="date" />
+              </label>
+            </div>
+
+            <div class="admin-form-row">
+              <label class="field">
+                <span>Categorie</span>
+                <input type="text" name="category" placeholder="Bijvoorbeeld: Kosten" />
+              </label>
+              <label class="field">
+                <span>Slug</span>
+                <input type="text" name="slug" placeholder="automatisch indien leeg" />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Samenvatting</span>
+              <textarea name="summary" placeholder="Leeg laten mag. Dan wordt automatisch een samenvatting gemaakt."></textarea>
+            </label>
+
+            <label class="field field-check">
+              <input type="checkbox" name="featured" />
+              <span>Zet deze blog uitgelicht bovenaan het overzicht</span>
+            </label>
+
+            <label class="field">
+              <span>Volledige tekst</span>
+              <textarea name="body" class="admin-textarea-large" placeholder="Gebruik gewone tekst, lege regels tussen alinea's, eventueel ## voor tussenkoppen en - voor opsommingen."></textarea>
+            </label>
+          </form>
+
+          <div class="admin-toolbar">
+            <button type="button" class="btn btn-ghost" data-admin-copy-current-post>Kopieer huidig blogblok</button>
+            <button type="button" class="btn btn-ghost" data-admin-copy-posts>Kopieer volledig blogbestand</button>
+            <button type="button" class="btn btn-primary" data-admin-download-posts>Download blog-posts.txt</button>
+          </div>
+
+          <p class="admin-status" data-admin-post-status aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <h3>Gegenereerd blogbestand</h3>
+          <p class="admin-card-copy">Dit is de volledige inhoud van <code>content/blog-posts.txt</code> zoals die na je wijzigingen zou moeten zijn.</p>
+        </div>
+        <textarea class="admin-output" data-admin-posts-output spellcheck="false"></textarea>
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-head">
+        <div>
+          <div class="admin-kicker">Arnoud</div>
+          <h2>Kerninformatie Arnoud</h2>
+        </div>
+        <div class="admin-toolbar">
+          <button type="button" class="btn btn-primary" data-admin-generate-arnoud>Genereer arnoud-data.js</button>
+          <button type="button" class="btn btn-ghost" data-admin-copy-arnoud>Kopieer arnoud-data.js</button>
+          <button type="button" class="btn btn-ghost" data-admin-download-arnoud>Download arnoud-data.js</button>
+        </div>
+      </div>
+
+      <div class="admin-grid admin-grid-single">
+        <div class="admin-card">
+          <form class="admin-form" data-admin-arnoud-form>
+            <div class="admin-form-row">
+              <label class="field">
+                <span>Naam</span>
+                <input type="text" name="naam" />
+              </label>
+              <label class="field">
+                <span>Rol</span>
+                <input type="text" name="rol" />
+              </label>
+            </div>
+
+            <div class="admin-form-row">
+              <label class="field">
+                <span>Werkgebied</span>
+                <input type="text" name="werkgebied" />
+              </label>
+              <label class="field">
+                <span>Sinds</span>
+                <input type="number" name="sinds" />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Bio</span>
+              <textarea name="bio" class="admin-textarea-medium" placeholder="Gebruik een lege regel tussen alinea's."></textarea>
+            </label>
+
+            <label class="field">
+              <span>Specialisaties</span>
+              <textarea name="specialisaties" placeholder="Eén specialisatie per regel."></textarea>
+            </label>
+
+            <div class="admin-form-row admin-form-row-triple">
+              <label class="field">
+                <span>Ervaring (jaren)</span>
+                <input type="number" name="ervaringJaren" />
+              </label>
+              <label class="field">
+                <span>Zonder rechter (%)</span>
+                <input type="number" name="zonderRechterPct" />
+              </label>
+              <label class="field">
+                <span>Gesprekken range</span>
+                <input type="text" name="gesprekkenRange" />
+              </label>
+            </div>
+
+            <div class="admin-form-row admin-form-row-triple">
+              <label class="field">
+                <span>Telefoon</span>
+                <input type="text" name="telefoon" />
+              </label>
+              <label class="field">
+                <span>TelefoonLink</span>
+                <input type="text" name="telefoonLink" placeholder="+316..." />
+              </label>
+              <label class="field">
+                <span>WhatsApp</span>
+                <input type="text" name="whatsapp" placeholder="316..." />
+              </label>
+            </div>
+
+            <div class="admin-form-row admin-form-row-triple">
+              <label class="field">
+                <span>E-mail</span>
+                <input type="email" name="email" />
+              </label>
+              <label class="field">
+                <span>Adres</span>
+                <input type="text" name="adres" />
+              </label>
+              <label class="field">
+                <span>Bereikbaar</span>
+                <input type="text" name="bereikbaar" />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>LinkedIn</span>
+              <input type="url" name="linkedin" />
+            </label>
+          </form>
+          <p class="admin-status" data-admin-arnoud-status aria-live="polite"></p>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-head">
+            <h3>Gegenereerd arnoud-data.js</h3>
+            <p class="admin-card-copy">Deze output kun je downloaden of kopiëren en daarna de bestaande <code>arnoud-data.js</code> mee vervangen.</p>
+          </div>
+          <textarea class="admin-output admin-output-large" data-admin-arnoud-output spellcheck="false"></textarea>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<script src="../arnoud-data.js"></script>
+<script src="../assets/js/admin.js"></script>
+</body>
+</html>
