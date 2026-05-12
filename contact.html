@@ -71,30 +71,30 @@
         </div>
       </div>
 
-      <form class="form" data-demo-form>
+      <form class="form" data-mailto-form data-form-subject="Nieuwe contactaanvraag via volpa.nl">
         <div class="row">
           <div class="field">
             <label for="contact-fname">Voornaam</label>
-            <input id="contact-fname" type="text" placeholder="Mijn naam is…" />
+            <input id="contact-fname" name="voornaam" type="text" required placeholder="Mijn naam is…" />
           </div>
           <div class="field">
             <label for="contact-lname">Achternaam</label>
-            <input id="contact-lname" type="text" placeholder="…" />
+            <input id="contact-lname" name="achternaam" type="text" required placeholder="…" />
           </div>
         </div>
         <div class="row">
           <div class="field">
             <label for="contact-mail">E-mail</label>
-            <input id="contact-mail" type="email" placeholder="naam@example.nl" />
+            <input id="contact-mail" name="email" type="email" required placeholder="naam@example.nl" />
           </div>
           <div class="field">
             <label for="contact-tel">Telefoon (optioneel)</label>
-            <input id="contact-tel" type="tel" placeholder="06 ..." />
+            <input id="contact-tel" name="telefoon" type="tel" placeholder="06 ..." />
           </div>
         </div>
         <div class="field">
           <label for="contact-onderwerp">Waar wil je over praten?</label>
-          <select id="contact-onderwerp">
+          <select id="contact-onderwerp" name="onderwerp">
             <option>Een eerste oriëntatie</option>
             <option>Mediation starten</option>
             <option>Financieel doorrekenen</option>
@@ -103,12 +103,13 @@
         </div>
         <div class="field">
           <label for="contact-bericht">Korte toelichting</label>
-          <textarea id="contact-bericht" placeholder="Wat is er gaande? Een paar zinnen volstaan."></textarea>
+          <textarea id="contact-bericht" name="bericht" required placeholder="Wat is er gaande? Een paar zinnen volstaan."></textarea>
         </div>
         <button type="submit" class="btn btn-primary submit">
           Stuur bericht <span class="arr">→</span>
         </button>
         <span class="form-meta">We reageren dezelfde of de eerstvolgende werkdag. Vertrouwelijk — altijd.</span>
+        <p class="form-status" aria-live="polite"></p>
       </form>
     </div>
   </div>

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaq();
   initReveal();
   initSmoothScroll();
-  initDemoForms();
+  initMailtoForms();
 });
 
 function hydrateVolpaData() {
@@ -160,7 +160,7 @@ function initReveal() {
       });
     }, { threshold: 0.05 });
 
-    document.querySelectorAll("section.block, .hero-stats, .hero-card, .content-card, .post-card").forEach((element) => {
+    document.querySelectorAll("section.block, .hero-stats, .hero-card, .content-card, .post-card, .lead-card, .proof-card, .conversion-card, .result-panel, .testimonial-panel").forEach((element) => {
       element.classList.add("reveal");
       observer.observe(element);
     });
@@ -192,16 +192,82 @@ function initSmoothScroll() {
   });
 }
 
-function initDemoForms() {
-  document.querySelectorAll("[data-demo-form]").forEach((form) => {
+function initMailtoForms() {
+  document.querySelectorAll("[data-mailto-form]").forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+
+      const fields = Array.from(form.querySelectorAll("input, textarea, select"));
+      const status = form.querySelector(".form-status");
       const button = form.querySelector('button[type="submit"]');
-      if (!button) {
+      const email = window.VOLPA && window.VOLPA.contact && window.VOLPA.contact.email;
+      const originalButtonLabel = button ? button.innerHTML : "";
+
+      let valid = true;
+      if (status) {
+        status.textContent = "";
+        status.classList.remove("error", "success");
+      }
+
+      fields.forEach((field) => {
+        field.classList.remove("invalid");
+        const next = field.nextElementSibling;
+        if (next && next.classList.contains("field-error")) {
+          next.remove();
+        }
+
+        const required = field.hasAttribute("required");
+        const value = field.value.trim();
+        const isEmail = field.type === "email";
+
+        if ((required && !value) || (isEmail && value && !/\S+@\S+\.\S+/.test(value))) {
+          valid = false;
+          field.classList.add("invalid");
+          const error = document.createElement("span");
+          error.className = "field-error";
+          error.textContent = !value ? "Dit veld is verplicht." : "Vul een geldig e-mailadres in.";
+          field.insertAdjacentElement("afterend", error);
+        }
+      });
+
+      if (!valid) {
+        if (status) {
+          status.textContent = "Controleer de gemarkeerde velden en probeer opnieuw.";
+          status.classList.add("error");
+        }
         return;
       }
 
-      button.textContent = "Verzonden ✓";
+      if (!email) {
+        if (status) {
+          status.textContent = "Er is geen e-mailadres ingesteld voor dit formulier.";
+          status.classList.add("error");
+        }
+        return;
+      }
+
+      const subject = form.getAttribute("data-form-subject") || "Nieuwe aanvraag via volpa.nl";
+      const body = fields
+        .filter((field) => field.name && field.value.trim())
+        .map((field) => `${field.name.charAt(0).toUpperCase()}${field.name.slice(1)}: ${field.value.trim()}`)
+        .join("\n");
+
+      if (button) {
+        button.innerHTML = "E-mail wordt geopend…";
+      }
+
+      if (status) {
+        status.textContent = "Je e-mailapp wordt geopend met een ingevuld bericht.";
+        status.classList.add("success");
+      }
+
+      window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      window.setTimeout(() => {
+        if (button) {
+          button.innerHTML = originalButtonLabel;
+        }
+      }, 1800);
     });
   });
 }
