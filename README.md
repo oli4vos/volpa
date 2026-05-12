@@ -92,9 +92,9 @@ Omdat deze site meerdere HTML-pagina's en een `assets/` map gebruikt, staat er o
 ## Blog toevoegen
 
 1. Open `blog-aanleveren.html`
-2. Vul de velden in en genereer het blogblok
-3. Kopieer of download de output
-4. Plak het blok onderaan `content/blog-posts.txt`
+2. Vul minimaal titel en tekst in
+3. Gebruik `Open e-mailconcept`, `Kopieer blogblok` of `Download .txt`
+4. Plak het blok onderaan `content/blog-posts.txt` als je handmatig publiceert
 5. Push naar GitHub Pages
 
 ## Opmerkingen

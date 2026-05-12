@@ -32,71 +32,74 @@
 <section class="page-hero">
   <div class="container">
     <div class="sec-num">Volpa · Blog aanleveren</div>
-    <h1 class="page-title">Laat iemand een blogtekst aanleveren <em>zonder code te openen</em>.</h1>
-    <p class="page-intro">Vul hieronder de velden in. De pagina maakt automatisch het juiste formaat aan dat je alleen nog hoeft te kopiëren, te downloaden of door te sturen.</p>
+    <h1 class="page-title">Maak blog aanleveren zo simpel mogelijk: <em>titel, tekst, klaar</em>.</h1>
+    <p class="page-intro">Iemand hoeft hier alleen een titel en gewone tekst te plakken. Datum, samenvatting, categorie en linknaam worden automatisch aangevuld, tenzij je ze zelf wilt overschrijven.</p>
   </div>
 </section>
 
 <main class="page-main">
   <div class="container page-grid">
     <section class="content-card">
-      <h2>Blogblok genereren</h2>
+      <div class="generator-simple-note">Simpelste route: vul alleen titel en tekst in.</div>
+      <h2>Nieuwe blog aanleveren</h2>
       <form class="form form-tight generator-form" data-blog-generator>
         <div class="field">
           <label for="gen-title">Titel</label>
           <input id="gen-title" name="title" type="text" placeholder="Bijvoorbeeld: Wat kost een scheiding echt?" />
         </div>
-        <div class="row">
-          <div class="field">
-            <label for="gen-date">Datum</label>
-            <input id="gen-date" name="date" type="date" />
-          </div>
-          <div class="field">
-            <label for="gen-category">Categorie</label>
-            <input id="gen-category" name="category" type="text" placeholder="Bijvoorbeeld: Kosten" />
-          </div>
-        </div>
-        <div class="field">
-          <label for="gen-summary">Korte samenvatting</label>
-          <textarea id="gen-summary" name="summary" placeholder="2 zinnen die op de blogoverzichtspagina komen."></textarea>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="gen-featured">Uitgelicht op overzicht</label>
-            <select id="gen-featured" name="featured">
-              <option value="nee">Nee</option>
-              <option value="ja">Ja</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="gen-slug-preview">Automatische linknaam</label>
-            <input id="gen-slug-preview" data-blog-slug type="text" readonly placeholder="wordt automatisch gemaakt" />
-          </div>
-        </div>
         <div class="field">
           <label for="gen-body">Volledige tekst</label>
-          <textarea id="gen-body" name="body" class="generator-body" placeholder="Plak hier de hele tekst. Gebruik een lege regel tussen alinea's. Gebruik ## voor tussenkoppen en - voor opsommingen."></textarea>
+          <textarea id="gen-body" name="body" class="generator-body" placeholder="Plak hier gewoon de hele tekst. Tekst uit Word of e-mail mag direct. Lege regels tussen alinea's zijn genoeg."></textarea>
         </div>
+        <details class="deepdive generator-advanced">
+          <summary>Optionele details aanpassen</summary>
+          <div class="deepdive-grid">
+            <div class="field">
+              <label for="gen-date">Datum</label>
+              <input id="gen-date" name="date" type="date" />
+            </div>
+            <div class="field">
+              <label for="gen-category">Categorie</label>
+              <input id="gen-category" name="category" type="text" placeholder="Standaard: Algemeen" />
+            </div>
+            <div class="field">
+              <label for="gen-summary">Korte samenvatting</label>
+              <textarea id="gen-summary" name="summary" placeholder="Leeg laten mag. Dan wordt automatisch een samenvatting gemaakt."></textarea>
+            </div>
+            <div class="field">
+              <label for="gen-featured">Uitgelicht op overzicht</label>
+              <select id="gen-featured" name="featured">
+                <option value="nee">Nee</option>
+                <option value="ja">Ja</option>
+              </select>
+            </div>
+            <div class="field field-full">
+              <label for="gen-slug-preview">Automatische linknaam</label>
+              <input id="gen-slug-preview" data-blog-slug type="text" readonly placeholder="wordt automatisch gemaakt" />
+            </div>
+          </div>
+        </details>
         <button type="submit" class="btn btn-primary" data-generate-blog>Genereer blogblok <span class="arr">→</span></button>
       </form>
     </section>
 
     <aside class="content-card">
-      <h4>Hoe aanleveren</h4>
+      <h4>3 simpele stappen</h4>
       <ul class="mini-list">
-        <li>Vul de velden in op deze pagina.</li>
-        <li>Kopieer het gegenereerde blok hieronder.</li>
-        <li>Plak het onderaan <code>content/blog-posts.txt</code> of stuur het naar degene die publiceert.</li>
+        <li>Vul alleen titel en tekst in.</li>
+        <li>Klik op <strong>Open e-mailconcept</strong> of download het tekstbestand.</li>
+        <li>De rest wordt automatisch voorbereid voor publicatie.</li>
       </ul>
-      <div class="notice">Dit is bewust simpel gehouden. Eén tekstbestand voedt zowel de blog-overzichtspagina als de losse artikelen.</div>
+      <div class="notice">Gewone platte tekst werkt al. Tussenkoppen met <code>##</code> en opsommingen met <code>-</code> mogen, maar hoeven niet.</div>
     </aside>
   </div>
 
   <div class="container page-stack">
     <section class="content-card">
-      <h2>Klaar om te kopiëren</h2>
+      <h2>Klaar om te versturen of op te slaan</h2>
       <textarea class="generator-output" data-blog-output spellcheck="false" placeholder="Hier verschijnt automatisch het blogblok."></textarea>
       <div class="hero-actions generator-actions">
+        <button type="button" class="btn btn-primary" data-email-blog>Open e-mailconcept</button>
         <button type="button" class="btn btn-primary" data-copy-blog>Kopieer blogblok</button>
         <button type="button" class="btn btn-ghost" data-download-blog>Download .txt</button>
         <a href="blog.html" class="btn btn-ghost">Bekijk blog</a>

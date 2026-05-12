@@ -7,17 +7,17 @@ De blog werkt nu vanuit één bestand:
 ## Makkelijkste route
 
 1. Open `blog-aanleveren.html`
-2. Vul titel, datum, categorie, samenvatting en tekst in
-3. Klik op `Genereer blogblok`
-4. Gebruik daarna `Kopieer blogblok` of `Download .txt`
-5. Plak die output onderaan `content/blog-posts.txt`
-6. Commit en push de wijziging
+2. Vul alleen `Titel` en `Volledige tekst` in
+3. Klik op `Open e-mailconcept`, `Kopieer blogblok` of `Download .txt`
+4. Datum, samenvatting, categorie en linknaam worden automatisch gemaakt
+5. Alleen als je iets specifieks wilt aanpassen, open je `Optionele details aanpassen`
 
 ## Tekstregels
 
 - Gebruik een lege regel tussen alinea's
-- Gebruik `##` voor een tussenkop
-- Gebruik `-` voor een opsomming
+- Gewone platte tekst is genoeg
+- Gebruik eventueel `##` voor een tussenkop
+- Gebruik eventueel `-` voor een opsomming
 - De `Slug` wordt automatisch gemaakt uit de titel
 - Zet `Uitgelicht` alleen op `ja` als dit artikel bovenaan het blogoverzicht moet staan
 

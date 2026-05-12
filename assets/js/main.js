@@ -559,10 +559,11 @@ function initBlogGenerator() {
   const status = document.querySelector("[data-blog-output-status]");
   const copyButton = document.querySelector("[data-copy-blog]");
   const downloadButton = document.querySelector("[data-download-blog]");
+  const emailButton = document.querySelector("[data-email-blog]");
   const slugPreview = document.querySelector("[data-blog-slug]");
   const preview = document.querySelector("[data-blog-preview]");
 
-  if (!form || !output || !status || !copyButton || !downloadButton || !slugPreview || !preview) {
+  if (!form || !output || !status || !copyButton || !downloadButton || !emailButton || !slugPreview || !preview) {
     return;
   }
 
@@ -575,25 +576,29 @@ function initBlogGenerator() {
     featured: form.querySelector('[name="featured"]')
   };
 
+  if (fields.date && !fields.date.value) {
+    fields.date.value = getTodayInputValue();
+  }
+
   const generate = () => {
     const title = fields.title.value.trim();
-    const date = fields.date.value.trim();
-    const category = fields.category.value.trim();
-    const summary = fields.summary.value.trim();
+    const date = (fields.date.value || getTodayInputValue()).trim();
+    const category = (fields.category.value || "Algemeen").trim();
     const body = fields.body.value.trim();
+    const summary = (fields.summary.value || summarizeBody(body)).trim();
     const featured = fields.featured.value === "ja" ? "ja" : "nee";
     const slug = slugify(title);
 
     slugPreview.value = slug;
+    if (!fields.date.value) {
+      fields.date.value = date;
+    }
 
     clearGeneratorErrors(form, status);
 
     let valid = true;
     [
       [fields.title, title],
-      [fields.date, date],
-      [fields.category, category],
-      [fields.summary, summary],
       [fields.body, body]
     ].forEach(([field, value]) => {
       if (!value) {
@@ -613,9 +618,17 @@ function initBlogGenerator() {
     if (!valid) {
       output.value = "";
       preview.innerHTML = '<p class="generator-placeholder">Vul eerst alle velden in voor een bruikbaar blogblok.</p>';
-      status.textContent = "Vul alle velden in voordat je het blogblok maakt.";
+      status.textContent = "Vul minimaal een titel en de tekst in.";
       status.classList.add("error");
       return null;
+    }
+
+    if (!fields.category.value.trim()) {
+      fields.category.value = category;
+    }
+
+    if (!fields.summary.value.trim()) {
+      fields.summary.value = summary;
     }
 
     const block = [
@@ -645,7 +658,7 @@ function initBlogGenerator() {
     status.classList.remove("error");
     status.classList.add("success");
 
-    return { block, slug, title };
+    return { block, slug, title, date, category, summary, body };
   };
 
   form.addEventListener("submit", (event) => {
@@ -698,6 +711,48 @@ function initBlogGenerator() {
     status.classList.remove("error");
     status.classList.add("success");
   });
+
+  emailButton.addEventListener("click", () => {
+    const draft = generate();
+    if (!draft) {
+      return;
+    }
+
+    const email = window.VOLPA && window.VOLPA.contact && window.VOLPA.contact.email;
+    if (!email) {
+      status.textContent = "Er is geen e-mailadres ingesteld voor blogaanlevering.";
+      status.classList.remove("success");
+      status.classList.add("error");
+      return;
+    }
+
+    const subject = `Blogaanlevering: ${draft.title}`;
+    const mailBody = [
+      "Nieuwe blogaanlevering voor Volpa.",
+      "",
+      `Titel: ${draft.title}`,
+      `Datum: ${draft.date}`,
+      `Categorie: ${draft.category}`,
+      `Samenvatting: ${draft.summary}`,
+      "",
+      "Inhoud:",
+      draft.body
+    ].join("\n");
+
+    const mailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+
+    if (mailto.length > 6000) {
+      status.textContent = "Deze tekst is te lang voor een e-mailconcept. Gebruik in dat geval Download .txt.";
+      status.classList.remove("success");
+      status.classList.add("error");
+      return;
+    }
+
+    status.textContent = "Je e-mailapp wordt geopend met de blogaanlevering.";
+    status.classList.remove("error");
+    status.classList.add("success");
+    window.location.href = mailto;
+  });
 }
 
 function clearGeneratorErrors(form, status) {
@@ -722,6 +777,50 @@ function formatBlogDate(value) {
     month: "long",
     year: "numeric"
   }).format(date);
+}
+
+function getTodayInputValue() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = `${today.getMonth() + 1}`.padStart(2, "0");
+  const day = `${today.getDate()}`.padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function summarizeBody(body) {
+  const cleaned = body
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("##") && !line.startsWith("- "))
+    .join(" ");
+
+  const fallback = body
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map((line) => line.replace(/^##\s*/, "").replace(/^-\s*/, "").trim())
+    .filter(Boolean)
+    .join(" ");
+
+  const source = cleaned || fallback;
+
+  if (!source) {
+    return "";
+  }
+
+  const sentences = source.match(/[^.!?]+[.!?]+/g);
+  if (sentences && sentences.length) {
+    const summary = sentences.slice(0, 2).join(" ").trim();
+    if (summary.length >= 80) {
+      return summary;
+    }
+  }
+
+  if (source.length <= 180) {
+    return source;
+  }
+
+  return `${source.slice(0, 177).trim()}...`;
 }
 
 function slugify(value) {
