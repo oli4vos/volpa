@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Volpa — Contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <span class="dot"></span>
+      Volpa
+      <small>begeleiding bij scheiding</small>
+    </a>
+    <nav class="nav-links">
+      <a href="mediation.html">Mediation</a>
+      <a href="financieel-advies.html">Financieel advies</a>
+      <a href="juridische-begeleiding.html">Juridische begeleiding</a>
+      <a href="over-arnoud.html">Over Arnoud</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu">Menu</button>
+    <a href="contact.html" class="nav-cta" aria-current="page">Even praten <span class="arr">→</span></a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="sec-num">Volpa · Contact</div>
+    <h1 class="page-title">Een eerste gesprek kan <em>eenvoudig beginnen</em>.</h1>
+    <p class="page-intro">
+      Deze losse contactpagina maakt het straks makkelijker om campagnes, advertenties of CTA-knoppen direct op één duidelijke bestemming te laten uitkomen.
+    </p>
+  </div>
+</section>
+
+<main class="page-main">
+  <div class="container">
+    <div class="contact">
+      <div>
+        <div class="sec-num">Contactgegevens</div>
+        <h2>Even <em>praten?</em></h2>
+        <p class="lede">Een eerste gesprek van 30 minuten is kosteloos en nergens toe verplicht. Bel, mail of laat hieronder iets achter — we nemen dezelfde of de eerstvolgende werkdag contact op.</p>
+
+        <div class="contact-info">
+          <div class="ci-item">
+            <span class="ki">Telefoon</span>
+            <span class="vi"><a href="tel:+31263030610" data-bind-telefoon>+31 (0)26 30 30 610</a></span>
+          </div>
+          <div class="ci-item">
+            <span class="ki">E-mail</span>
+            <span class="vi"><a href="mailto:hallo@volpa.nl" data-bind-email>hallo@volpa.nl</a></span>
+          </div>
+          <div class="ci-item">
+            <span class="ki">Locatie</span>
+            <span class="vi" data-bind="contact.adres">Velperweg 21 — Arnhem</span>
+          </div>
+          <div class="ci-item">
+            <span class="ki">Bereikbaar</span>
+            <span class="vi" data-bind="contact.bereikbaar">Ma–do · 09:00 – 18:00</span>
+          </div>
+          <div class="ci-item">
+            <span class="ki">WhatsApp</span>
+            <span class="vi"><a data-bind-whatsapp target="_blank" rel="noopener" href="https://wa.me/31651214752">Direct chatten</a></span>
+          </div>
+        </div>
+      </div>
+
+      <form class="form" data-demo-form>
+        <div class="row">
+          <div class="field">
+            <label for="contact-fname">Voornaam</label>
+            <input id="contact-fname" type="text" placeholder="Mijn naam is…" />
+          </div>
+          <div class="field">
+            <label for="contact-lname">Achternaam</label>
+            <input id="contact-lname" type="text" placeholder="…" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="contact-mail">E-mail</label>
+            <input id="contact-mail" type="email" placeholder="naam@example.nl" />
+          </div>
+          <div class="field">
+            <label for="contact-tel">Telefoon (optioneel)</label>
+            <input id="contact-tel" type="tel" placeholder="06 ..." />
+          </div>
+        </div>
+        <div class="field">
+          <label for="contact-onderwerp">Waar wil je over praten?</label>
+          <select id="contact-onderwerp">
+            <option>Een eerste oriëntatie</option>
+            <option>Mediation starten</option>
+            <option>Financieel doorrekenen</option>
+            <option>Iets anders</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="contact-bericht">Korte toelichting</label>
+          <textarea id="contact-bericht" placeholder="Wat is er gaande? Een paar zinnen volstaan."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary submit">
+          Stuur bericht <span class="arr">→</span>
+        </button>
+        <span class="form-meta">We reageren dezelfde of de eerstvolgende werkdag. Vertrouwelijk — altijd.</span>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="dot"></span>
+          Volpa
+          <small>begeleiding bij scheiding</small>
+        </a>
+        <p>Volpa staat voor menselijke begeleiding bij scheiding. Mediation, financieel advies en juridische zorg — onder één dak, op jullie tempo.</p>
+      </div>
+      <div>
+        <h5>Diensten</h5>
+        <ul>
+          <li><a href="mediation.html">Mediation</a></li>
+          <li><a href="financieel-advies.html">Financieel advies</a></li>
+          <li><a href="juridische-begeleiding.html">Juridische begeleiding</a></li>
+          <li><a href="index.html#aanpak">Onze aanpak</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Volpa</h5>
+        <ul>
+          <li><a href="over-arnoud.html">Over Arnoud</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="index.html#faq">Veelgestelde vragen</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Bereikbaar</h5>
+        <ul data-bind-footer-contact>
+          <li>+31 (0)26 30 30 610</li>
+          <li>hallo@volpa.nl</li>
+          <li>Velperweg 21, Arnhem</li>
+          <li>Ma–do · 09–18u</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>© 2026 Volpa B.V. · KvK 67891234</span>
+      <span class="marks">
+        <a href="privacy.html">Privacy</a>
+        <a href="voorwaarden.html">Voorwaarden</a>
+        <a href="cookies.html">Cookies</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="arnoud-data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
