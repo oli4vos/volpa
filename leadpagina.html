@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Volpa — rust, overzicht en afspraken die blijven staan</title>
+<meta name="description" content="Volpa begeleidt scheidingen met mediation, financieel advies en juridische zorg in één traject. Plan een vrijblijvende intake." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Direct naar inhoud</a>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <span class="dot"></span>
+      Volpa
+      <small>begeleiding bij scheiding</small>
+    </a>
+    <nav class="nav-links">
+      <a href="#waarom">Waarom Volpa</a>
+      <a href="#werkwijze">Werkwijze</a>
+      <a href="#arnoud">Arnoud</a>
+      <a href="#faq">Vragen</a>
+    </nav>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu">Menu</button>
+    <a href="#intake" class="nav-cta">
+      Plan intake
+      <span class="arr">→</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="landing-hero">
+    <div class="container hero-split">
+      <div class="hero-copy">
+        <div class="eyebrow">Mediation · Financieel · Juridisch</div>
+        <span class="hero-note">Binnen 1 werkdag reactie · intake van 30 minuten · online of op locatie</span>
+        <h1 class="display">
+          Een scheiding begeleiden<br/>
+          zonder <em>strijd, ruis of uitstel</em>.
+        </h1>
+        <p class="hero-lede">
+          Volpa helpt jullie of jou alleen naar duidelijke afspraken over kinderen, woning, alimentatie en toekomst. Rust in het gesprek. Scherpte in de cijfers. Zorgvuldigheid in de afwikkeling.
+        </p>
+        <div class="hero-actions">
+          <a href="#intake" class="btn btn-primary">Plan een vrijblijvende intake <span class="arr">→</span></a>
+          <a href="tel:+31651214752" class="btn btn-ghost" data-bind-telefoon>Bel direct</a>
+        </div>
+        <div class="hero-points">
+          <div class="hero-point">
+            <strong>Voor stellen die waardigheid willen bewaren</strong>
+            <span>Ook als het gesprek al stroef voelt.</span>
+          </div>
+          <div class="hero-point">
+            <strong>Drie disciplines, één traject</strong>
+            <span>Mediation, financiën en juridische afwikkeling onder één dak.</span>
+          </div>
+          <div class="hero-point">
+            <strong>Afspraken die financieel uitvoerbaar blijven</strong>
+            <span>Niet alleen netjes op papier, maar ook houdbaar in het echte leven.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="lead-shell" id="intake">
+        <div class="lead-card">
+          <span class="lead-kicker">Vrijblijvende intake</span>
+          <h2>Vraag direct een eerste gesprek aan</h2>
+          <p>Laat kort weten waar jullie staan. Volpa reageert dezelfde of de eerstvolgende werkdag.</p>
+
+          <form class="form form-tight" data-mailto-form data-form-subject="Aanvraag vrijblijvende intake via volpa.nl">
+            <div class="field">
+              <label for="lead-name">Naam</label>
+              <input id="lead-name" name="naam" type="text" required placeholder="Jouw naam" />
+            </div>
+            <div class="field">
+              <label for="lead-email">E-mail</label>
+              <input id="lead-email" name="email" type="email" required placeholder="naam@example.nl" />
+            </div>
+            <div class="field">
+              <label for="lead-phone">Telefoon</label>
+              <input id="lead-phone" name="telefoon" type="tel" placeholder="06 ..." />
+            </div>
+            <div class="field">
+              <label for="lead-situation">Situatie</label>
+              <textarea id="lead-situation" name="situatie" required placeholder="Waar lopen jullie nu tegenaan?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary submit">
+              Vraag intake aan <span class="arr">→</span>
+            </button>
+            <p class="form-meta">Na verzenden opent je e-mailapp met een ingevuld bericht aan Volpa.</p>
+            <p class="form-status" aria-live="polite"></p>
+          </form>
+
+          <div class="lead-direct">
+            <a href="tel:+31651214752" class="lead-direct-item">
+              <span class="lead-direct-label">Bel direct</span>
+              <strong data-bind-telefoon>+31 (0)6 51 21 47 52</strong>
+            </a>
+            <a href="https://wa.me/31651214752" class="lead-direct-item" data-bind-whatsapp target="_blank" rel="noopener">
+              <span class="lead-direct-label">WhatsApp</span>
+              <strong>Start een gesprek</strong>
+            </a>
+          </div>
+        </div>
+
+        <div class="proof-stack">
+          <article class="proof-card accent">
+            <span class="proof-label">Gemiddeld traject</span>
+            <strong><span data-bind="stats.gesprekkenRange">4–6</span> gesprekken</strong>
+            <p>Tot convenant, ouderschapsplan en inschrijving.</p>
+          </article>
+          <article class="proof-card">
+            <span class="proof-label">Afloop zonder rechter</span>
+            <strong><span data-bind="stats.zonderRechterPct">96</span>%</strong>
+            <p>Van de trajecten wordt samen afgerond.</p>
+          </article>
+        </div>
+      </aside>
+    </div>
+
+    <div class="container">
+      <div class="proof-grid">
+        <div class="proof-item">
+          <span class="proof-value">Binnen 1 werkdag</span>
+          <span class="proof-copy">eerste reactie op nieuwe aanvragen</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-value">Één aanspreekpunt</span>
+          <span class="proof-copy">voor gesprek, cijfers en juridische afwikkeling</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-value">Rust voor kinderen</span>
+          <span class="proof-copy">door afspraken die ook later uitvoerbaar blijven</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="waarom">
+    <div class="container">
+      <header class="sec-head">
+        <div>
+          <div class="sec-num">01 — Waarom Volpa</div>
+          <h2 class="section-title">Jullie hebben geen extra conflict nodig, maar een traject dat <em>beweegt</em>.</h2>
+        </div>
+        <p class="sec-intro">
+          Veel mensen zoeken pas hulp wanneer het gesprek vastloopt. De landing page moet daarom meteen duidelijk maken wat Volpa oplost: vertraging, onduidelijkheid en afspraken die later alsnog uit elkaar vallen.
+        </p>
+      </header>
+
+      <div class="conversion-grid">
+        <article class="conversion-card contrast">
+          <span class="card-label">Als het nu schuurt</span>
+          <h3>Gesprekken lopen vast, cijfers blijven vaag en iedereen trekt zich terug.</h3>
+          <ul>
+            <li>Onrust over woning, kinderen of geld</li>
+            <li>Geen vertrouwen in twee losse adviseurs met twee losse verhalen</li>
+            <li>Angst dat een scheiding onnodig escaleert</li>
+          </ul>
+        </article>
+        <article class="conversion-card">
+          <span class="card-label">Wat Volpa toevoegt</span>
+          <h3>Eerst overzicht. Dan richting. Daarna pas afspraken.</h3>
+          <ul>
+            <li>Het gesprek krijgt structuur zonder juridisch theater</li>
+            <li>Financiële keuzes worden concreet doorgerekend</li>
+            <li>De stukken worden zorgvuldig vastgelegd en afgerond</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="container">
+      <header class="sec-head">
+        <div>
+          <div class="sec-num">02 — Resultaat</div>
+          <h2 class="section-title">Waar cliënten uiteindelijk voor komen is <em>rust met houvast</em>.</h2>
+        </div>
+        <p class="sec-intro">
+          Niet de mooiste brochuretekst, maar een uitkomst waar je verder mee kunt. Dat betekent minder ruis, meer overzicht en afspraken die niet na twee maanden opnieuw ter discussie staan.
+        </p>
+      </header>
+
+      <div class="result-layout">
+        <div class="result-panel">
+          <div class="result-panel-head">
+            <span class="card-label">Wat het oplevert</span>
+            <h3>Een scheidingstraject dat inhoudelijk sterk is en menselijk blijft.</h3>
+          </div>
+          <div class="result-list">
+            <article>
+              <strong>Voor ouders</strong>
+              <p>Een ouderschapsplan dat rekening houdt met het dagelijks leven, niet alleen met goede bedoelingen.</p>
+            </article>
+            <article>
+              <strong>Voor de woning en financiën</strong>
+              <p>Duidelijke scenario’s voor woonlasten, alimentatie, pensioen en de verdeling van vermogen of schulden.</p>
+            </article>
+            <article>
+              <strong>Voor de afronding</strong>
+              <p>Convenant, ouderschapsplan en juridische afwikkeling op één lijn, zodat er later minder interpretatieruimte ontstaat.</p>
+            </article>
+          </div>
+        </div>
+
+        <aside class="testimonial-panel">
+          <span class="proof-label">Cliëntreactie</span>
+          <blockquote>
+            "We zochten geen vechtscheiding en ook geen wollig gesprek. Arnoud bracht overzicht, tempo en rust. Daardoor konden we besluiten nemen die echt bleven staan."
+          </blockquote>
+          <p>L. &amp; M. · traject met kinderen en koopwoning</p>
+          <a href="#intake" class="text-link">Plan ook een eerste gesprek <span>→</span></a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="werkwijze">
+    <div class="container">
+      <header class="sec-head">
+        <div>
+          <div class="sec-num">03 — Werkwijze</div>
+          <h2 class="section-title">Geen mist. Geen losse eindjes. Wel <em>vier heldere stappen</em>.</h2>
+        </div>
+        <p class="sec-intro">
+          Het traject beweegt mee met de situatie, maar de volgorde blijft bewust helder. Daardoor ontstaat snelheid zonder druk en rust zonder stilstand.
+        </p>
+      </header>
+
+      <div class="approach">
+        <div class="step">
+          <div class="stepnum"><em>01</em></div>
+          <h4>Eerste intake</h4>
+          <p>Een vrijblijvende kennismaking waarin duidelijk wordt wat er speelt, hoe urgent het is en of mediation past.</p>
+        </div>
+        <div class="step">
+          <div class="stepnum"><em>02</em></div>
+          <h4>Volledig overzicht</h4>
+          <p>Alle relevante onderwerpen op tafel: kinderen, woning, inkomsten, lasten, pensioen en praktische zorgen.</p>
+        </div>
+        <div class="step">
+          <div class="stepnum"><em>03</em></div>
+          <h4>Afspraken uitwerken</h4>
+          <p>Per onderwerp toewerken naar afspraken die emotioneel werkbaar en financieel verdedigbaar zijn.</p>
+        </div>
+        <div class="step">
+          <div class="stepnum"><em>04</em></div>
+          <h4>Vastleggen en afronden</h4>
+          <p>De uitkomst wordt juridisch netjes vastgelegd en klaargemaakt voor formele afronding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="arnoud">
+    <div class="container">
+      <div class="about">
+        <div class="portrait">
+          <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#E8DCC5"/>
+                <stop offset="100%" stop-color="#D2C2A4"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#pg)"/>
+            <g opacity="0.55">
+              <circle cx="200" cy="200" r="78" fill="#8E5238"/>
+              <path d="M70 500 C 80 360, 320 360, 330 500 Z" fill="#8E5238"/>
+              <ellipse cx="200" cy="170" rx="50" ry="48" fill="#B26F50"/>
+              <path d="M85 500 C 95 380, 305 380, 315 500 Z" fill="#B26F50"/>
+            </g>
+          </svg>
+          <div class="placeholder-label">[ portretfoto Arnoud ]</div>
+        </div>
+        <div>
+          <div class="sec-num">04 — Over Arnoud</div>
+          <h3 data-bind-name>Arnoud <em>Volpa</em></h3>
+          <div class="role" data-bind="rol">Oprichter · MfN-mediator · vFAS-lid</div>
+
+          <div data-bind-bio>
+            <p>Ik ben Arnoud. Veertien jaar geleden begeleidde ik mijn eerste scheiding — toen al met de overtuiging dat je het op een nettere manier kunt doen dan de rechtszaal. Sindsdien heb ik honderden mensen door dit proces geholpen.</p>
+            <p>Mijn aanpak is rustig, helder en eerlijk. Ik geloof niet in trucjes, ik geloof in goede gesprekken, gedegen kennis en het lef om de moeilijke onderwerpen op tafel te leggen. Ook — en juist — als het schuurt.</p>
+            <p>Werkgebied: Gelderland en omstreken. Online afspraken zijn altijd mogelijk.</p>
+          </div>
+
+          <div class="specs" data-bind-specs></div>
+          <div class="creds" data-bind-creds></div>
+
+          <details class="deepdive">
+            <summary>Opleidingen &amp; publicaties</summary>
+            <div class="deepdive-grid">
+              <div>
+                <h6>Opleidingen</h6>
+                <ul data-bind-opleidingen></ul>
+              </div>
+              <div>
+                <h6>Publicaties</h6>
+                <ul data-bind-publicaties></ul>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <div class="container">
+      <div class="faq-grid">
+        <div>
+          <div class="sec-num">05 — Veelgestelde vragen</div>
+          <h2 class="section-title">De vragen die meestal spelen <em>vóórdat mensen bellen</em>.</h2>
+          <p class="sec-intro" style="margin-top:24px">
+            Dit zijn doorgaans de vragen die iemand in stilte al heeft voordat hij of zij de stap zet. Juist daarom horen ze op een landingspagina thuis.
+          </p>
+        </div>
+
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <button class="faq-q">Wat kost een traject bij Volpa?<span class="faq-icon"></span></button>
+            <div class="faq-a"><div class="faq-a-inner">We werken met een uurtarief en een transparante intake. Een gemiddeld mediationtraject ligt tussen €2.400 en €4.200, inclusief convenant, ouderschapsplan en inschrijving. Bij het kennismakingsgesprek geven we een eerlijke schatting.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Hoe snel kunnen we starten?<span class="faq-icon"></span></button>
+            <div class="faq-a"><div class="faq-a-inner">Een eerste gesprek plannen we doorgaans binnen 7 tot 10 dagen. Bij urgente situaties kijken we altijd of het sneller kan.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Kan ik ook eerst alleen praten?<span class="faq-icon"></span></button>
+            <div class="faq-a"><div class="faq-a-inner">Ja. Een eerste oriënterend gesprek mag altijd alleen. Als jullie daarna samen verder willen in mediation, bouwen we het traject vanaf daar zorgvuldig op.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Wat als de communicatie al is vastgelopen?<span class="faq-icon"></span></button>
+            <div class="faq-a"><div class="faq-a-inner">Dat komt vaak voor. Dan beginnen we rustiger, met heldere spelregels en meer structuur. Juist daar maakt begeleiding vaak het verschil.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Doen jullie ook online gesprekken?<span class="faq-icon"></span></button>
+            <div class="faq-a"><div class="faq-a-inner">Ja. Volpa werkt op locatie, hybride en volledig online. Voor veel cliënten werkt een combinatie van beide het prettigst.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block cta-band" style="border-bottom:none">
+    <div class="container cta-band-inner">
+      <div>
+        <div class="sec-num">06 — Eerste stap</div>
+        <h2 class="section-title">Als jullie helderheid willen, begin dan met een <em>goed eerste gesprek</em>.</h2>
+      </div>
+      <div class="cta-band-actions">
+        <p>Een intake van 30 minuten geeft vaak al meer rust dan weken blijven draaien in hetzelfde gesprek.</p>
+        <div class="hero-actions">
+          <a href="#intake" class="btn btn-primary">Plan de intake <span class="arr">→</span></a>
+          <a href="contact.html" class="btn btn-ghost">Naar contactpagina</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid footer-grid-compact">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="dot"></span>
+          Volpa
+          <small>begeleiding bij scheiding</small>
+        </a>
+        <p>Volpa begeleidt scheidingen met mediation, financieel advies en juridische zorg in één helder traject.</p>
+      </div>
+      <div>
+        <h5>Navigatie</h5>
+        <ul>
+          <li><a href="#waarom">Waarom Volpa</a></li>
+          <li><a href="#werkwijze">Werkwijze</a></li>
+          <li><a href="#arnoud">Over Arnoud</a></li>
+          <li><a href="#faq">Veelgestelde vragen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Bereikbaar</h5>
+        <ul data-bind-footer-contact>
+          <li>+31 (0)6 51 21 47 52</li>
+          <li>arnoudvos@volpa.nl</li>
+          <li>Martinusweg 17 — Zevenaar</li>
+          <li>Ma–do · 09–18u</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>© 2026 Volpa B.V. · KvK 67891234</span>
+      <span class="marks">
+        <a href="privacy.html">Privacy</a>
+        <a href="voorwaarden.html">Voorwaarden</a>
+        <a href="cookies.html">Cookies</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="arnoud-data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
