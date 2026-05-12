@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  initStyleSwitcher();
   hydrateVolpaData();
   initMobileNav();
   initFaq();
@@ -10,6 +11,243 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const BLOG_SOURCE = "content/blog-posts.txt";
 let blogPostsPromise = null;
+
+function initStyleSwitcher() {
+  const styles = Array.isArray(window.VOLPA_THEME_STYLES) && window.VOLPA_THEME_STYLES.length
+    ? window.VOLPA_THEME_STYLES
+    : [{ id: "main", name: "Basis", href: "assets/css/main.css" }];
+  const storageKey = window.VOLPA_THEME_STORAGE_KEY || "volpa-active-style";
+  const link = ensureStyleLink(styles);
+
+  if (!link || styles.length < 2 || document.querySelector("[data-style-switcher]")) {
+    return;
+  }
+
+  injectStyleSwitcherStyles();
+
+  const switcher = document.createElement("div");
+  switcher.className = "style-switcher";
+  switcher.setAttribute("data-style-switcher", "");
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "style-switcher-trigger";
+  trigger.setAttribute("aria-expanded", "false");
+  trigger.setAttribute("aria-haspopup", "true");
+
+  const panel = document.createElement("div");
+  panel.className = "style-switcher-panel";
+  panel.hidden = true;
+
+  const title = document.createElement("div");
+  title.className = "style-switcher-title";
+  title.textContent = "Kies design";
+  panel.appendChild(title);
+
+  const optionButtons = styles.map((style) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "style-switcher-option";
+    button.dataset.styleId = style.id;
+    button.innerHTML = `<span>${escapeHtml(style.name)}</span><small>${escapeHtml(style.href.split("/").pop())}</small>`;
+    button.addEventListener("click", () => {
+      applyStyle(style.id, styles, link, storageKey);
+      syncStyleSwitcherState(styles, link, trigger, optionButtons);
+      panel.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+    });
+    panel.appendChild(button);
+    return button;
+  });
+
+  trigger.addEventListener("click", () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    trigger.setAttribute("aria-expanded", String(open));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!switcher.contains(event.target)) {
+      panel.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      panel.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  switcher.appendChild(trigger);
+  switcher.appendChild(panel);
+  document.body.appendChild(switcher);
+
+  syncStyleSwitcherState(styles, link, trigger, optionButtons);
+}
+
+function ensureStyleLink(styles) {
+  let link = document.getElementById("site-stylesheet");
+  if (link) {
+    return link;
+  }
+
+  link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.id = "site-stylesheet";
+  link.href = styles[0].href;
+  link.setAttribute("data-style-id", styles[0].id);
+  document.head.appendChild(link);
+  return link;
+}
+
+function applyStyle(styleId, styles, link, storageKey) {
+  const active = styles.find((style) => style.id === styleId) || styles[0];
+  link.href = active.href;
+  link.setAttribute("data-style-id", active.id);
+
+  try {
+    window.localStorage.setItem(storageKey, active.id);
+  } catch (error) {
+    return;
+  }
+
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set("theme", active.id);
+    window.history.replaceState({}, "", url);
+  } catch (error) {
+    return;
+  }
+}
+
+function syncStyleSwitcherState(styles, link, trigger, optionButtons) {
+  const activeId = link.getAttribute("data-style-id") || styles[0].id;
+  const active = styles.find((style) => style.id === activeId) || styles[0];
+
+  trigger.innerHTML = `Design: <strong>${escapeHtml(active.name)}</strong><span aria-hidden="true">▾</span>`;
+
+  optionButtons.forEach((button) => {
+    const isActive = button.dataset.styleId === active.id;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
+function injectStyleSwitcherStyles() {
+  if (document.getElementById("style-switcher-styles")) {
+    return;
+  }
+
+  const style = document.createElement("style");
+  style.id = "style-switcher-styles";
+  style.textContent = `
+    .style-switcher {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 120;
+      font-family: "Geist", -apple-system, system-ui, sans-serif;
+    }
+
+    .style-switcher-trigger,
+    .style-switcher-option {
+      appearance: none;
+      border: 1px solid rgba(20, 24, 28, 0.18);
+      background: rgba(252, 248, 240, 0.96);
+      color: #14181c;
+      box-shadow: 0 16px 40px -24px rgba(20, 24, 28, 0.42);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+
+    .style-switcher-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .style-switcher-trigger strong {
+      font-weight: 600;
+    }
+
+    .style-switcher-panel {
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 10px);
+      width: min(240px, calc(100vw - 32px));
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(20, 24, 28, 0.12);
+      background: rgba(252, 248, 240, 0.98);
+      box-shadow: 0 20px 48px -30px rgba(20, 24, 28, 0.38);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+    }
+
+    .style-switcher-title {
+      margin-bottom: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6a6b6c;
+    }
+
+    .style-switcher-option {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      text-align: left;
+      box-shadow: none;
+    }
+
+    .style-switcher-option + .style-switcher-option {
+      margin-top: 8px;
+    }
+
+    .style-switcher-option small {
+      font-size: 11px;
+      color: #6a6b6c;
+      letter-spacing: 0.04em;
+    }
+
+    .style-switcher-option.active {
+      border-color: rgba(20, 24, 28, 0.4);
+      background: #14181c;
+      color: #fcfaf3;
+    }
+
+    .style-switcher-option.active small {
+      color: rgba(252, 250, 243, 0.72);
+    }
+
+    @media (max-width: 720px) {
+      .style-switcher {
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+      }
+
+      .style-switcher-trigger {
+        min-height: 44px;
+        padding: 0 14px;
+        font-size: 13px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
 
 function hydrateVolpaData() {
   const data = window.VOLPA;
