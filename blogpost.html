@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Volpa — Blog</title>
+<title>Volpa — Blogartikel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -30,20 +30,24 @@
 </header>
 
 <section class="page-hero">
-  <div class="container">
+  <div class="container article-hero" data-blog-post-hero>
+    <a href="blog.html" class="back-link">← Terug naar blog</a>
     <div class="sec-num">Volpa · Blog</div>
-    <h1 class="page-title">Ruimte voor uitleg, context en <em>inhoud die mag groeien</em>.</h1>
-    <p class="page-intro">
-      Je had al een blog-link in de navigatie. Die wees nergens heen. Er staat nu een echte pagina, zodat je later artikelen kunt toevoegen zonder het ontwerp opnieuw open te breken.
-    </p>
+    <h1 class="page-title">Artikel wordt geladen…</h1>
+    <p class="page-intro">Even wachten.</p>
   </div>
 </section>
 
 <main class="page-main">
-  <div class="container page-stack">
-    <div class="notice">Nieuwe blogs komen nu uit één menselijk leesbaar bestand: <code>content/blog-posts.txt</code>. Voor aanlevering staat er ook een hulpmiddel op <a href="blog-aanleveren.html">blog-aanleveren.html</a>.</div>
-    <section class="content-card blog-featured" data-blog-featured></section>
-    <div class="post-list" data-blog-list></div>
+  <div class="container article-layout">
+    <article class="content-card article-content" data-blog-post-content>
+      <p>Artikel wordt geladen…</p>
+    </article>
+    <aside class="content-card article-side">
+      <h4>Verder lezen</h4>
+      <ul class="link-list" data-blog-related></ul>
+      <div class="notice">Deze pagina wordt automatisch gevuld vanuit één centraal blogbestand.</div>
+    </aside>
   </div>
 </main>
 
@@ -73,7 +77,6 @@
           <li><a href="over-arnoud.html">Over Arnoud</a></li>
           <li><a href="blog.html" aria-current="page">Blog</a></li>
           <li><a href="blog-aanleveren.html">Blog aanleveren</a></li>
-          <li><a href="index.html#faq">Veelgestelde vragen</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>

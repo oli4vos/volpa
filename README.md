@@ -13,9 +13,14 @@ volpa/
 ├── over-arnoud.html
 ├── contact.html
 ├── blog.html
+├── blogpost.html
+├── blog-aanleveren.html
 ├── privacy.html
 ├── voorwaarden.html
 ├── cookies.html
+├── BLOG-AANLEVEREN.md
+├── content/
+│   └── blog-posts.txt
 ├── arnoud-data.js
 └── assets/
     ├── css/
@@ -33,7 +38,13 @@ volpa/
   Voor alle styling van de homepage en subpagina's.
 
 - `assets/js/main.js`
-  Voor interactie zoals FAQ, smooth scroll, formulieren en het invullen van data uit `arnoud-data.js`.
+  Voor interactie zoals FAQ, smooth scroll, formulieren, blogrendering en het invullen van data uit `arnoud-data.js`.
+
+- `content/blog-posts.txt`
+  Voor alle blogartikelen in één eenvoudig tekstformaat.
+
+- `blog-aanleveren.html`
+  Voor niet-technische aanlevering van nieuwe blogartikelen met copy/download-flow.
 
 - `*.html`
   Voor paginacontent en navigatie.
@@ -77,6 +88,14 @@ Omdat deze site meerdere HTML-pagina's en een `assets/` map gebruikt, staat er o
 1. Kopieer een bestaande subpagina, bijvoorbeeld `mediation.html`
 2. Pas titel, intro en inhoud aan
 3. Voeg de link toe in navigatie of footer
+
+## Blog toevoegen
+
+1. Open `blog-aanleveren.html`
+2. Vul de velden in en genereer het blogblok
+3. Kopieer of download de output
+4. Plak het blok onderaan `content/blog-posts.txt`
+5. Push naar GitHub Pages
 
 ## Opmerkingen
 

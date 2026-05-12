@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initSmoothScroll();
   initMailtoForms();
+  initBlogSystem();
 });
+
+const BLOG_SOURCE = "content/blog-posts.txt";
+let blogPostsPromise = null;
 
 function hydrateVolpaData() {
   const data = window.VOLPA;
@@ -270,4 +274,470 @@ function initMailtoForms() {
       }, 1800);
     });
   });
+}
+
+function initBlogSystem() {
+  initBlogGenerator();
+
+  const blogIndex = document.querySelector("[data-blog-featured], [data-blog-list]");
+  const blogPostPage = document.querySelector("[data-blog-post-hero], [data-blog-post-content], [data-blog-related]");
+
+  if (!blogIndex && !blogPostPage) {
+    return;
+  }
+
+  getBlogPosts()
+    .then((posts) => {
+      if (blogIndex) {
+        renderBlogIndex(posts);
+      }
+
+      if (blogPostPage) {
+        renderBlogPostPage(posts);
+      }
+    })
+    .catch(() => {
+      renderBlogLoadError();
+    });
+}
+
+function getBlogPosts() {
+  if (!blogPostsPromise) {
+    blogPostsPromise = fetch(BLOG_SOURCE, { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Blogbron kon niet worden geladen.");
+        }
+        return response.text();
+      })
+      .then(parseBlogPosts);
+  }
+
+  return blogPostsPromise;
+}
+
+function parseBlogPosts(source) {
+  const blocks = source
+    .replace(/\r\n?/g, "\n")
+    .split("=== POST ===")
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  return blocks
+    .map((block) => {
+      const lines = block.split("\n");
+      const headers = {};
+      const bodyLines = [];
+      let inBody = false;
+
+      lines.forEach((line) => {
+        if (line.trim() === "Inhoud:") {
+          inBody = true;
+          return;
+        }
+
+        if (inBody) {
+          bodyLines.push(line);
+          return;
+        }
+
+        const separatorIndex = line.indexOf(":");
+        if (separatorIndex === -1) {
+          return;
+        }
+
+        const key = line.slice(0, separatorIndex).trim().toLowerCase();
+        const value = line.slice(separatorIndex + 1).trim();
+        headers[key] = value;
+      });
+
+      const title = headers.titel || "Zonder titel";
+      const date = headers.datum || "";
+      const category = headers.categorie || "Algemeen";
+      const summary = headers.samenvatting || "";
+      const slug = headers.slug || slugify(title);
+      const featured = /^(ja|yes|true|1)$/i.test(headers.uitgelicht || "");
+      const body = bodyLines.join("\n").trim();
+
+      return {
+        title,
+        date,
+        category,
+        summary,
+        slug,
+        featured,
+        body
+      };
+    })
+    .filter((post) => post.title && post.body)
+    .sort((left, right) => `${right.date}`.localeCompare(`${left.date}`));
+}
+
+function renderBlogIndex(posts) {
+  const featuredElement = document.querySelector("[data-blog-featured]");
+  const listElement = document.querySelector("[data-blog-list]");
+
+  if (!featuredElement && !listElement) {
+    return;
+  }
+
+  if (!posts.length) {
+    const emptyMarkup = '<div class="notice">Er staan nog geen blogartikelen in het centrale blogbestand.</div>';
+    if (featuredElement) {
+      featuredElement.innerHTML = emptyMarkup;
+    }
+    if (listElement) {
+      listElement.innerHTML = "";
+    }
+    return;
+  }
+
+  const featuredPost = posts.find((post) => post.featured) || posts[0];
+  const listPosts = posts.filter((post) => post.slug !== featuredPost.slug);
+
+  if (featuredElement) {
+    featuredElement.innerHTML = `
+      <div class="blog-kicker">Uitgelicht artikel</div>
+      <div class="blog-featured-grid">
+        <div class="blog-featured-copy">
+          <div class="blog-meta">
+            <span>${escapeHtml(featuredPost.category)}</span>
+            <span>${escapeHtml(formatBlogDate(featuredPost.date))}</span>
+          </div>
+          <h2>${escapeHtml(featuredPost.title)}</h2>
+          <p>${escapeHtml(featuredPost.summary)}</p>
+          <a href="blogpost.html?slug=${encodeURIComponent(featuredPost.slug)}" class="btn btn-primary">Lees artikel <span class="arr">→</span></a>
+        </div>
+        <div class="blog-featured-note">
+          <strong>Eenvoudig publicatiemodel</strong>
+          <p>Eén tekstbestand voedt de overzichtspagina en alle losse artikelen. Dat maakt publiceren voorspelbaar en onderhoudbaar.</p>
+          <a href="blog-aanleveren.html" class="btn btn-ghost">Nieuw artikel aanleveren</a>
+        </div>
+      </div>
+    `;
+  }
+
+  if (listElement) {
+    listElement.innerHTML = listPosts.length
+      ? listPosts.map((post) => createBlogCard(post)).join("")
+      : `
+        <article class="post-card">
+          <div class="tag">Meer artikelen</div>
+          <h3>Nog geen tweede artikel</h3>
+          <p>Zodra er nieuwe stukken in <code>content/blog-posts.txt</code> staan, verschijnen ze hier automatisch.</p>
+        </article>
+      `;
+  }
+}
+
+function renderBlogPostPage(posts) {
+  const heroElement = document.querySelector("[data-blog-post-hero]");
+  const contentElement = document.querySelector("[data-blog-post-content]");
+  const relatedElement = document.querySelector("[data-blog-related]");
+
+  if (!heroElement || !contentElement || !relatedElement) {
+    return;
+  }
+
+  if (!posts.length) {
+    heroElement.innerHTML = `
+      <a href="blog.html" class="back-link">← Terug naar blog</a>
+      <div class="sec-num">Volpa · Blog</div>
+      <h1 class="page-title">Nog geen artikel beschikbaar</h1>
+      <p class="page-intro">Zodra er iets in het blogbestand staat, wordt deze pagina automatisch gevuld.</p>
+    `;
+    contentElement.innerHTML = '<p>Voeg eerst een artikel toe via <code>content/blog-posts.txt</code> of via de aanleverpagina.</p>';
+    relatedElement.innerHTML = "";
+    return;
+  }
+
+  const slug = new URLSearchParams(window.location.search).get("slug");
+  const selectedPost = posts.find((post) => post.slug === slug) || posts[0];
+  const notFound = slug && selectedPost.slug !== slug;
+
+  document.title = `Volpa — ${selectedPost.title}`;
+
+  heroElement.innerHTML = `
+    <a href="blog.html" class="back-link">← Terug naar blog</a>
+    <div class="sec-num">Volpa · Blog</div>
+    <div class="blog-meta">
+      <span>${escapeHtml(selectedPost.category)}</span>
+      <span>${escapeHtml(formatBlogDate(selectedPost.date))}</span>
+    </div>
+    <h1 class="page-title">${escapeHtml(selectedPost.title)}</h1>
+    <p class="page-intro">${escapeHtml(selectedPost.summary)}</p>
+    ${notFound ? '<div class="notice">Dit artikel werd niet gevonden. Daarom staat hier het meest recente artikel.</div>' : ""}
+  `;
+
+  contentElement.innerHTML = renderBlogBody(selectedPost.body);
+  relatedElement.innerHTML = posts
+    .filter((post) => post.slug !== selectedPost.slug)
+    .slice(0, 4)
+    .map((post) => (
+      `<li><a href="blogpost.html?slug=${encodeURIComponent(post.slug)}">${escapeHtml(post.title)}</a><span>${escapeHtml(formatBlogDate(post.date))}</span></li>`
+    ))
+    .join("") || "<li>Er staan nog geen andere artikelen klaar.</li>";
+}
+
+function renderBlogLoadError() {
+  const hero = document.querySelector("[data-blog-post-hero]");
+  if (hero) {
+    hero.innerHTML = `
+      <a href="blog.html" class="back-link">← Terug naar blog</a>
+      <div class="sec-num">Volpa · Blog</div>
+      <h1 class="page-title">Blog kon niet laden</h1>
+      <p class="page-intro">Controleer of de site via een webserver draait en of <code>content/blog-posts.txt</code> bereikbaar is.</p>
+    `;
+  }
+
+  const targets = document.querySelectorAll("[data-blog-featured], [data-blog-list], [data-blog-post-content], [data-blog-related]");
+  targets.forEach((target) => {
+    target.innerHTML = target.tagName === "UL"
+      ? '<li>De bloginhoud kon niet worden geladen.</li>'
+      : '<div class="notice">De bloginhoud kon niet worden geladen. Controleer of de site via een webserver draait.</div>';
+  });
+}
+
+function createBlogCard(post) {
+  return `
+    <article class="post-card">
+      <div class="tag">${escapeHtml(post.category)} · ${escapeHtml(formatBlogDate(post.date))}</div>
+      <h3>${escapeHtml(post.title)}</h3>
+      <p>${escapeHtml(post.summary)}</p>
+      <a href="blogpost.html?slug=${encodeURIComponent(post.slug)}" class="post-link">Lees artikel →</a>
+    </article>
+  `;
+}
+
+function renderBlogBody(body) {
+  const lines = body.replace(/\r\n?/g, "\n").split("\n");
+  const chunks = [];
+  let index = 0;
+
+  while (index < lines.length) {
+    const line = lines[index].trim();
+
+    if (!line) {
+      index += 1;
+      continue;
+    }
+
+    if (line.startsWith("## ")) {
+      chunks.push(`<h2>${escapeHtml(line.slice(3).trim())}</h2>`);
+      index += 1;
+      continue;
+    }
+
+    if (line.startsWith("- ")) {
+      const items = [];
+      while (index < lines.length && lines[index].trim().startsWith("- ")) {
+        items.push(`<li>${escapeHtml(lines[index].trim().slice(2).trim())}</li>`);
+        index += 1;
+      }
+      chunks.push(`<ul>${items.join("")}</ul>`);
+      continue;
+    }
+
+    const paragraph = [];
+    while (index < lines.length) {
+      const value = lines[index].trim();
+      if (!value || value.startsWith("## ") || value.startsWith("- ")) {
+        break;
+      }
+      paragraph.push(value);
+      index += 1;
+    }
+    chunks.push(`<p>${escapeHtml(paragraph.join(" "))}</p>`);
+  }
+
+  return chunks.join("");
+}
+
+function initBlogGenerator() {
+  const form = document.querySelector("[data-blog-generator]");
+  const output = document.querySelector("[data-blog-output]");
+  const status = document.querySelector("[data-blog-output-status]");
+  const copyButton = document.querySelector("[data-copy-blog]");
+  const downloadButton = document.querySelector("[data-download-blog]");
+  const slugPreview = document.querySelector("[data-blog-slug]");
+  const preview = document.querySelector("[data-blog-preview]");
+
+  if (!form || !output || !status || !copyButton || !downloadButton || !slugPreview || !preview) {
+    return;
+  }
+
+  const fields = {
+    title: form.querySelector('[name="title"]'),
+    date: form.querySelector('[name="date"]'),
+    category: form.querySelector('[name="category"]'),
+    summary: form.querySelector('[name="summary"]'),
+    body: form.querySelector('[name="body"]'),
+    featured: form.querySelector('[name="featured"]')
+  };
+
+  const generate = () => {
+    const title = fields.title.value.trim();
+    const date = fields.date.value.trim();
+    const category = fields.category.value.trim();
+    const summary = fields.summary.value.trim();
+    const body = fields.body.value.trim();
+    const featured = fields.featured.value === "ja" ? "ja" : "nee";
+    const slug = slugify(title);
+
+    slugPreview.value = slug;
+
+    clearGeneratorErrors(form, status);
+
+    let valid = true;
+    [
+      [fields.title, title],
+      [fields.date, date],
+      [fields.category, category],
+      [fields.summary, summary],
+      [fields.body, body]
+    ].forEach(([field, value]) => {
+      if (!value) {
+        valid = false;
+        field.classList.add("invalid");
+        const error = document.createElement("span");
+        error.className = "field-error";
+        error.textContent = "Dit veld is verplicht.";
+        field.insertAdjacentElement("afterend", error);
+      }
+    });
+
+    if (!title || !slug) {
+      valid = false;
+    }
+
+    if (!valid) {
+      output.value = "";
+      preview.innerHTML = '<p class="generator-placeholder">Vul eerst alle velden in voor een bruikbaar blogblok.</p>';
+      status.textContent = "Vul alle velden in voordat je het blogblok maakt.";
+      status.classList.add("error");
+      return null;
+    }
+
+    const block = [
+      "=== POST ===",
+      `Titel: ${title}`,
+      `Datum: ${date}`,
+      `Categorie: ${category}`,
+      `Slug: ${slug}`,
+      `Samenvatting: ${summary}`,
+      `Uitgelicht: ${featured}`,
+      "",
+      "Inhoud:",
+      body
+    ].join("\n");
+
+    output.value = block;
+    preview.innerHTML = `
+      <div class="blog-meta">
+        <span>${escapeHtml(category)}</span>
+        <span>${escapeHtml(formatBlogDate(date))}</span>
+      </div>
+      <h3>${escapeHtml(title)}</h3>
+      <p class="preview-summary">${escapeHtml(summary)}</p>
+      <div class="preview-body">${renderBlogBody(body)}</div>
+    `;
+    status.textContent = "Blogblok klaar. Je kunt het nu kopiëren of downloaden.";
+    status.classList.remove("error");
+    status.classList.add("success");
+
+    return { block, slug, title };
+  };
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    generate();
+  });
+
+  form.addEventListener("input", () => {
+    const title = fields.title.value.trim();
+    slugPreview.value = slugify(title);
+  });
+
+  copyButton.addEventListener("click", async () => {
+    const draft = generate();
+    if (!draft) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(draft.block);
+      status.textContent = "Blogblok gekopieerd naar het klembord.";
+      status.classList.remove("error");
+      status.classList.add("success");
+    } catch (error) {
+      output.focus();
+      output.select();
+      status.textContent = "Kopiëren via knop lukte niet. De tekst is wel geselecteerd.";
+      status.classList.remove("success");
+      status.classList.add("error");
+    }
+  });
+
+  downloadButton.addEventListener("click", () => {
+    const draft = generate();
+    if (!draft) {
+      return;
+    }
+
+    const blob = new Blob([draft.block], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${draft.slug || "blog"}-aanlevering.txt`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    status.textContent = "Blogblok gedownload als tekstbestand.";
+    status.classList.remove("error");
+    status.classList.add("success");
+  });
+}
+
+function clearGeneratorErrors(form, status) {
+  form.querySelectorAll(".invalid").forEach((field) => field.classList.remove("invalid"));
+  form.querySelectorAll(".field-error").forEach((field) => field.remove());
+  status.textContent = "";
+  status.classList.remove("error", "success");
+}
+
+function formatBlogDate(value) {
+  if (!value) {
+    return "Datum volgt";
+  }
+
+  const date = new Date(`${value}T12:00:00`);
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("nl-NL", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  }).format(date);
+}
+
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function escapeHtml(value) {
+  return `${value}`
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
