@@ -126,7 +126,9 @@ function syncStyleSwitcherState(styles, link, trigger, optionButtons) {
   const activeId = link.getAttribute("data-style-id") || styles[0].id;
   const active = styles.find((style) => style.id === activeId) || styles[0];
 
-  trigger.innerHTML = `Design: <strong>${escapeHtml(active.name)}</strong><span aria-hidden="true">▾</span>`;
+  trigger.innerHTML = `<span>Design</span><span aria-hidden="true">▾</span>`;
+  trigger.setAttribute("aria-label", `Actief design: ${active.name}`);
+  trigger.setAttribute("title", `Actief design: ${active.name}`);
 
   optionButtons.forEach((button) => {
     const isActive = button.dataset.styleId === active.id;
@@ -145,8 +147,8 @@ function injectStyleSwitcherStyles() {
   style.textContent = `
     .style-switcher {
       position: fixed;
-      right: 16px;
-      bottom: 16px;
+      right: 18px;
+      bottom: 18px;
       z-index: 120;
       font-family: "Geist", -apple-system, system-ui, sans-serif;
     }
@@ -166,21 +168,19 @@ function injectStyleSwitcherStyles() {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      min-height: 46px;
-      padding: 0 16px;
+      min-height: 40px;
+      padding: 0 14px;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
       cursor: pointer;
-    }
-
-    .style-switcher-trigger strong {
-      font-weight: 600;
     }
 
     .style-switcher-panel {
       position: absolute;
       right: 0;
-      bottom: calc(100% + 10px);
+      bottom: calc(100% + 8px);
       width: min(240px, calc(100vw - 32px));
       max-height: min(68vh, 460px);
       overflow-y: auto;
@@ -243,13 +243,14 @@ function injectStyleSwitcherStyles() {
       }
 
       .style-switcher-panel {
+        width: min(220px, calc(100vw - 24px));
         max-height: min(64vh, 400px);
       }
 
       .style-switcher-trigger {
-        min-height: 44px;
-        padding: 0 14px;
-        font-size: 13px;
+        min-height: 38px;
+        padding: 0 12px;
+        font-size: 12px;
       }
     }
   `;
