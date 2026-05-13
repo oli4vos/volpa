@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Volpa</title>
+  <desc id="desc">Volpa begeleidt mensen bij scheiding met rust, overzicht en financiele duidelijkheid.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f2e9"/>
+      <stop offset="100%" stop-color="#ece3d7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="164" cy="146" r="16" fill="#b26f50"/>
+  <text x="196" y="158" fill="#1b1814" font-family="Georgia, 'Times New Roman', serif" font-size="76">Volpa</text>
+  <text x="196" y="198" fill="#6b6357" font-family="'Courier New', monospace" font-size="22" letter-spacing="5">BEGELEIDING BIJ SCHEIDING</text>
+  <text x="112" y="330" fill="#1b1814" font-family="Georgia, 'Times New Roman', serif" font-size="94">Rust, overzicht en</text>
+  <text x="112" y="430" fill="#8e5238" font-family="Georgia, 'Times New Roman', serif" font-size="94" font-style="italic">financiele duidelijkheid</text>
+  <text x="112" y="520" fill="#3a332b" font-family="Arial, sans-serif" font-size="34">Mediation, financieel advies en juridische begeleiding bij scheiding.</text>
+</svg>

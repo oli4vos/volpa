@@ -1,0 +1,27 @@
+# Volpa
+
+> Volpa begeleidt mensen bij scheiding met aandacht voor rust, overzicht en financiele duidelijkheid.
+
+## Belangrijkste pagina's
+
+[Home](https://oli4vos.github.io/volpa/): Introductie van Volpa en de combinatie van mediation, financiele begeleiding en juridische afwikkeling.
+[Mediation](https://oli4vos.github.io/volpa/mediation.html): Begeleiding bij gesprekken en afspraken rond scheiding.
+[Financieel advies](https://oli4vos.github.io/volpa/financieel-advies.html): Inzicht in woonlasten, alimentatie, pensioen, vermogen en haalbare afspraken.
+[Juridische begeleiding](https://oli4vos.github.io/volpa/juridische-begeleiding.html): Afspraken, convenant, ouderschapsplan en juridische aandachtspunten.
+[Over Arnoud](https://oli4vos.github.io/volpa/over-arnoud.html): Achtergrond van Arnoud Vos en de werkwijze van Volpa.
+[Contact](https://oli4vos.github.io/volpa/contact.html): Contact opnemen voor een eerste gesprek.
+
+## Kennisbank
+
+[Kennisbank scheiden](https://oli4vos.github.io/volpa/kennisbank-scheiden.html): Overzicht van uitlegpagina's over scheiding en begeleiding.
+[Mediation of financiele scheidingsbegeleiding](https://oli4vos.github.io/volpa/scheiden/mediation-of-financiele-scheidingsbegeleiding.html): Verschil tussen mediation en financiele begeleiding.
+[Wat is financiele scheidingsbegeleiding](https://oli4vos.github.io/volpa/scheiden/wat-is-financiele-scheidingsbegeleiding.html): Uitleg over alimentatie, woning, pensioen, vermogen en scenario's.
+[Wat is pendelmediation](https://oli4vos.github.io/volpa/scheiden/wat-is-pendelmediation.html): Begeleiding wanneer rechtstreeks overleg lastig is.
+[Scheiden met een koophuis](https://oli4vos.github.io/volpa/scheiden/scheiden-met-koophuis.html): Over woning, hypotheek, overwaarde, uitkoop en betaalbaarheid.
+[Second opinion scheidingsconvenant](https://oli4vos.github.io/volpa/scheiden/second-opinion-scheidingsconvenant.html): Controle op financiele uitvoerbaarheid en samenhang van afspraken.
+
+## Blog
+
+[Wat kost een scheiding echt?](https://oli4vos.github.io/volpa/blog/wat-kost-een-scheiding-echt.html): Over hoe tempo, woning, alimentatie en route de totale kosten van scheiden beinvloeden.
+[Wanneer werkt mediation wel en wanneer niet?](https://oli4vos.github.io/volpa/blog/wanneer-werkt-mediation.html): Over wanneer mediation voldoende basis heeft en wanneer een andere route verstandiger is.
+[De woning bij scheiding: blijven, verkopen of wachten?](https://oli4vos.github.io/volpa/blog/woning-bij-scheiding.html): Over scenario's rond de woning, woonlasten en toekomstig budget.

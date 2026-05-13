@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "generate:blog": "node scripts/generate-blog-pages.js",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
+    "build:static": "node scripts/generate-blog-pages.js && node scripts/generate-sitemap.js"
+  }
+}

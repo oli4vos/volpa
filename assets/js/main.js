@@ -598,13 +598,13 @@ function parseBlogPosts(source) {
         headers[key] = value;
       });
 
+      const body = bodyLines.join("\n").trim();
       const title = headers.titel || "Zonder titel";
       const date = headers.datum || "";
       const category = headers.categorie || "Algemeen";
-      const summary = headers.samenvatting || "";
+      const summary = headers.samenvatting || summarizeBody(body);
       const slug = headers.slug || slugify(title);
       const featured = /^(ja|yes|true|1)$/i.test(headers.uitgelicht || "");
-      const body = bodyLines.join("\n").trim();
 
       return {
         title,
@@ -653,7 +653,7 @@ function renderBlogIndex(posts) {
           </div>
           <h2>${escapeHtml(featuredPost.title)}</h2>
           <p>${escapeHtml(featuredPost.summary)}</p>
-          <a href="blogpost.html?slug=${encodeURIComponent(featuredPost.slug)}" class="btn btn-primary">Lees artikel <span class="arr">→</span></a>
+          <a href="${escapeHtml(getBlogPageHref(featuredPost))}" class="btn btn-primary">Lees artikel <span class="arr">→</span></a>
         </div>
         <div class="blog-featured-note">
           <strong>Eenvoudig publicatiemodel</strong>
@@ -681,12 +681,18 @@ function renderBlogPostPage(posts) {
   const heroElement = document.querySelector("[data-blog-post-hero]");
   const contentElement = document.querySelector("[data-blog-post-content]");
   const relatedElement = document.querySelector("[data-blog-related]");
+  const updateBlogPostSeo = window.VolpaSeo && typeof window.VolpaSeo.updateBlogPostSeo === "function"
+    ? window.VolpaSeo.updateBlogPostSeo
+    : null;
 
   if (!heroElement || !contentElement || !relatedElement) {
     return;
   }
 
   if (!posts.length) {
+    if (updateBlogPostSeo) {
+      updateBlogPostSeo(null);
+    }
     heroElement.innerHTML = `
       <a href="blog.html" class="back-link">← Terug naar blog</a>
       <div class="sec-num">Volpa · Blog</div>
@@ -702,7 +708,9 @@ function renderBlogPostPage(posts) {
   const selectedPost = posts.find((post) => post.slug === slug) || posts[0];
   const notFound = slug && selectedPost.slug !== slug;
 
-  document.title = `Volpa — ${selectedPost.title}`;
+  if (updateBlogPostSeo) {
+    updateBlogPostSeo(selectedPost);
+  }
 
   heroElement.innerHTML = `
     <a href="blog.html" class="back-link">← Terug naar blog</a>
@@ -721,12 +729,16 @@ function renderBlogPostPage(posts) {
     .filter((post) => post.slug !== selectedPost.slug)
     .slice(0, 4)
     .map((post) => (
-      `<li><a href="blogpost.html?slug=${encodeURIComponent(post.slug)}">${escapeHtml(post.title)}</a><span>${escapeHtml(formatBlogDate(post.date))}</span></li>`
+      `<li><a href="${escapeHtml(getBlogPageHref(post))}">${escapeHtml(post.title)}</a><span>${escapeHtml(formatBlogDate(post.date))}</span></li>`
     ))
     .join("") || "<li>Er staan nog geen andere artikelen klaar.</li>";
 }
 
 function renderBlogLoadError() {
+  if (window.VolpaSeo && typeof window.VolpaSeo.updateBlogPostSeo === "function") {
+    window.VolpaSeo.updateBlogPostSeo(null);
+  }
+
   const hero = document.querySelector("[data-blog-post-hero]");
   if (hero) {
     hero.innerHTML = `
@@ -751,9 +763,17 @@ function createBlogCard(post) {
       <div class="tag">${escapeHtml(post.category)} · ${escapeHtml(formatBlogDate(post.date))}</div>
       <h3>${escapeHtml(post.title)}</h3>
       <p>${escapeHtml(post.summary)}</p>
-      <a href="blogpost.html?slug=${encodeURIComponent(post.slug)}" class="post-link">Lees artikel →</a>
+      <a href="${escapeHtml(getBlogPageHref(post))}" class="post-link">Lees artikel →</a>
     </article>
   `;
+}
+
+function getBlogPageHref(post) {
+  if (!post || !post.slug) {
+    return "blog.html";
+  }
+
+  return `blog/${encodeURIComponent(post.slug)}.html`;
 }
 
 function renderBlogBody(body) {
