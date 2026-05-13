@@ -1,0 +1,122 @@
+@import url("./main.css");
+
+/* Quieter alternative to the base design: smaller type, more whitespace, calmer rhythm. */
+:root{
+  --section-space: 136px;
+  --section-space-mobile: 84px;
+  --content-space: 38px;
+}
+
+.nav-inner{height:76px}
+.nav-links{gap:30px;font-size:13px}
+.nav-cta{padding:10px 16px;font-size:13px}
+
+.hero{padding:112px 0 92px}
+.hero-grid{gap:84px}
+.eyebrow{margin-bottom:28px;font-size:11px;letter-spacing:0.18em}
+h1.display{font-size:clamp(38px,5.8vw,72px);line-height:1.03;letter-spacing:-0.022em;max-width:12ch}
+.hero-lede{margin-top:28px;font-size:18px;line-height:1.72;max-width:620px}
+.hero-actions{margin-top:36px}
+.hero-card{padding:32px}
+.hero-card .quote{font-size:20px;line-height:1.45}
+.hero-stats{margin-top:92px}
+.stat{padding:26px 20px 24px}
+.stat .num{font-size:34px}
+
+.landing-hero{padding:88px 0 68px}
+.hero-split{gap:48px}
+.hero-copy{padding-top:18px}
+.hero-note{font-size:10px;letter-spacing:0.14em}
+.hero-points{margin-top:38px;gap:16px}
+.hero-point{padding:18px 18px 20px}
+.hero-point strong{font-size:19px;line-height:1.14}
+.hero-point span{margin-top:8px;font-size:13px;line-height:1.68}
+.lead-shell{gap:16px}
+.lead-card{padding:30px}
+.lead-card h2{font-size:34px;line-height:1.04;letter-spacing:-0.025em}
+.lead-card p{font-size:15px;line-height:1.72}
+.lead-direct{margin-top:20px}
+.lead-direct-item strong{font-size:20px}
+.proof-card strong{font-size:29px}
+.proof-grid{margin-top:28px}
+.proof-value{font-size:24px}
+.proof-copy{font-size:12px;line-height:1.58}
+.conversion-grid{gap:24px}
+.conversion-card{padding:30px}
+.conversion-card h3{font-size:32px;line-height:1.08}
+.conversion-card ul{margin-top:18px}
+.conversion-card li{font-size:15px;line-height:1.72}
+.result-layout{gap:24px}
+.result-panel-head h3{font-size:36px;line-height:1.04;max-width:13ch}
+.result-list{margin-top:24px;gap:16px}
+.result-list strong{font-size:21px}
+.testimonial-panel blockquote{font-size:25px;line-height:1.24}
+.cta-band-inner{gap:24px}
+
+section.block{padding:var(--section-space) 0}
+.sec-head{gap:72px;margin-bottom:72px}
+h2.section-title{font-size:clamp(30px,4vw,52px);line-height:1.06;letter-spacing:-0.022em;max-width:12ch}
+.sec-head p{font-size:16px;line-height:1.78;max-width:54ch}
+
+.cards-2,.cards-3,.post-list,.split-cards{gap:28px}
+.card,.content-card,.post-card{padding:34px}
+.card p,.content-card p,.post-card p{line-height:1.78}
+.content-card h2,.content-card h3{font-size:29px;line-height:1.14;margin-bottom:20px}
+.content-card p + p{margin-top:18px}
+.content-card ul{margin-top:24px;gap:16px}
+.content-card li{line-height:1.72}
+.post-card h3{font-size:24px;line-height:1.18;margin-bottom:16px}
+.post-link{margin-top:20px}
+
+.page-hero{padding:96px 0 52px}
+.page-title{font-size:clamp(36px,5.2vw,62px);line-height:1.03;letter-spacing:-0.022em;max-width:14ch}
+.page-grid,.article-layout,.blog-featured-grid,.result-layout,.conversion-grid,.cta-band-inner{align-items:start}
+.page-stack,.cta-panel,.contact-panel{gap:var(--content-space)}
+
+.article-preview h3{font-size:32px;line-height:1.1;margin-bottom:16px}
+.article-preview .preview-body h2{font-size:25px;line-height:1.14}
+
+.footer-grid{gap:56px;padding-bottom:56px}
+.copyright{padding-top:28px}
+
+@media (max-width: 920px){
+  .hero{padding:84px 0 70px}
+  .hero-grid{gap:56px}
+  .landing-hero{padding:64px 0 52px}
+  section.block{padding:108px 0}
+  .sec-head{gap:32px;margin-bottom:46px}
+  .page-hero{padding:72px 0 42px}
+}
+
+@media (max-width: 720px){
+  .nav-cta{width:100%;justify-content:center}
+  .hero{padding:60px 0 48px}
+  h1.display{font-size:42px;line-height:1.06}
+  .hero-lede{font-size:16px;line-height:1.7}
+  .hero-card{padding:26px 22px}
+  .hero-stats{margin-top:52px}
+  .landing-hero{padding:48px 0 40px}
+  .hero-copy{padding-top:8px}
+  .lead-card{padding:26px 22px}
+  .lead-card h2{font-size:30px}
+  .conversion-card{padding:26px 22px}
+  .conversion-card h3{font-size:28px}
+  .result-panel-head h3{font-size:31px}
+  section.block{padding:var(--section-space-mobile) 0}
+  h2.section-title{font-size:32px}
+  .content-card,.post-card,.card{padding:26px 22px}
+  .content-card h2,.content-card h3{font-size:26px}
+  .page-hero{padding:62px 0 34px}
+  .page-title{font-size:38px}
+  .footer-grid{gap:32px;padding-bottom:40px}
+}
+
+@media (max-width: 520px){
+  h1.display{font-size:37px}
+  h2.section-title{font-size:28px}
+  .page-title{font-size:34px}
+  .hero-point strong,
+  .lead-direct-item strong,
+  .result-list strong{font-size:19px}
+  .article-preview h3{font-size:29px}
+}

@@ -6,6 +6,7 @@
 
   const styles = [
     { id: "main", name: "Basis", href: new URL("main.css", cssBaseUrl).href },
+    { id: "main_small", name: "Basis rustig", href: new URL("main_small.css", cssBaseUrl).href },
     { id: "main2", name: "Alternatief", href: new URL("main2.css", cssBaseUrl).href },
     { id: "main3", name: "Design 3", href: new URL("main3.css", cssBaseUrl).href },
     { id: "main4", name: "Design 4", href: new URL("main4.css", cssBaseUrl).href },
