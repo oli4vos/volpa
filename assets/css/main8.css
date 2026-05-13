@@ -605,18 +605,18 @@ h1.display, h2.section-title, .page-title,
 .path-num, .step .stepnum,
 .deepdive li, .article-preview h3{
   font-family:var(--display);
-  font-weight:700;
-  letter-spacing:-0.035em;
+  font-weight:600;
+  letter-spacing:-0.028em;
   font-style:normal;
 }
 
-/* --- Dramatische schaal voor h1 --- */
+/* --- Rustigere hoofdregel --- */
 h1.display{
-  font-size:clamp(56px, 11vw, 168px);
-  line-height:0.86;
-  font-weight:800;
-  letter-spacing:-0.05em;
-  text-transform:uppercase;
+  font-size:clamp(50px, 8.2vw, 110px);
+  line-height:0.94;
+  font-weight:650;
+  letter-spacing:-0.038em;
+  text-transform:none;
 }
 h1.display em{
   font-style:normal;
@@ -626,24 +626,24 @@ h1.display em{
   position:relative;
   display:inline-block;
 }
-/* In plaats van marker-onderlijn: een verticaal kleur-blok ernaast */
+/* Zachte accentmarkering in plaats van zwaar blok */
 h1.display em::before{
   content:"";
   position:absolute;
-  left:-0.14em;
-  top:0.12em;
-  bottom:0.18em;
-  width:0.06em;
-  background:var(--gold);
+  left:0;
+  right:0;
+  bottom:0.06em;
+  height:0.16em;
+  background:linear-gradient(90deg, transparent 0%, var(--gold-wash) 16%, var(--gold-wash) 84%, transparent 100%);
 }
 
-/* --- H2 hoofdletters, tight --- */
+/* --- Minder dwingende sectiekoppen --- */
 h2.section-title, .page-title{
-  font-size:clamp(38px, 6vw, 88px);
-  line-height:0.94;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:-0.04em;
+  font-size:clamp(34px, 4.8vw, 64px);
+  line-height:1.02;
+  font-weight:620;
+  text-transform:none;
+  letter-spacing:-0.032em;
 }
 h2.section-title em, .page-title em, .lead-card h2 em,
 .conversion-card h3 em, .result-panel-head h3 em,
@@ -657,30 +657,30 @@ h2.section-title em, .page-title em, .lead-card h2 em,
 
 /* --- Service / topic / step headings: ook display sans --- */
 .service h3, .path h3, .conversion-card h3{
-  font-size:clamp(24px, 2.4vw, 38px);
+  font-size:clamp(24px, 2.1vw, 32px);
   text-transform:none;
-  letter-spacing:-0.025em;
+  letter-spacing:-0.022em;
 }
 .topic h4, .step h4{
-  font-weight:600;
-  letter-spacing:-0.02em;
+  font-weight:550;
+  letter-spacing:-0.016em;
   text-transform:none;
-  font-size:20px;
+  font-size:19px;
 }
 
-/* --- Sec-num: enorm decoratief --- */
+/* --- Sectielabel weer als rustige oriëntatie --- */
 .sec-num{
-  font-family:var(--display);
-  font-weight:800;
-  font-size:96px;
-  line-height:0.86;
-  color:var(--ink);
-  margin-bottom:32px;
-  letter-spacing:-0.06em;
-  text-transform:none;
+  font-family:var(--mono);
+  font-weight:500;
+  font-size:12px;
+  line-height:1.2;
+  color:var(--gold-deep);
+  margin-bottom:18px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
   opacity:1;
 }
-@media (max-width:720px){ .sec-num{ font-size:64px } }
+@media (max-width:720px){ .sec-num{ font-size:11px; margin-bottom:16px } }
 
 /* --- Eyebrows blijven mono, maar dikker --- */
 .eyebrow, .sec-num + .eyebrow,
@@ -757,33 +757,34 @@ h2.section-title em, .page-title em, .lead-card h2 em,
 
 /* --- Hero --- */
 .hero{ border-bottom:1px solid var(--ink); padding:88px 0 64px }
-.hero-lede{ font-size:18px; color:var(--ink-2); max-width:520px }
+.hero-lede{ font-size:18px; line-height:1.72; color:var(--ink-2); max-width:620px }
 .hero-card{ border:1px solid var(--ink); box-shadow:none }
-.hero-card .quote{ font-family:var(--display); font-weight:500; font-style:normal; font-size:24px; line-height:1.2; letter-spacing:-0.02em }
+.hero-card .quote{ font-family:var(--display); font-weight:500; font-style:normal; font-size:22px; line-height:1.34; letter-spacing:-0.018em }
 .avatar{ border-radius:0 }
 
 /* --- Stats: gigantische numerals --- */
 .hero-stats{ border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); margin-top:96px }
 .stat .num{
   font-family:var(--display);
-  font-weight:800;
-  font-size:64px;
-  line-height:0.9;
-  letter-spacing:-0.04em;
+  font-weight:700;
+  font-size:54px;
+  line-height:0.94;
+  letter-spacing:-0.03em;
   color:var(--ink);
 }
 .stat .num em{ font-style:normal; font-weight:500; color:var(--gold) }
-.stat .lbl{ color:var(--ink-3); font-size:11px; margin-top:14px }
+.stat .lbl{ color:var(--ink-3); font-size:11px; margin-top:16px; line-height:1.5 }
 
 /* --- Sections --- */
-section.block{ border-bottom:1px solid var(--ink); padding:128px 0 }
-@media (max-width:720px){ section.block{ padding:80px 0 } .sec-num{ font-size:48px; margin-bottom:20px } }
-.sec-head{ align-items:start }
+section.block{ border-bottom:1px solid var(--ink); padding:140px 0 }
+@media (max-width:720px){ section.block{ padding:88px 0 } }
+.sec-head{ align-items:start; margin-bottom:76px }
+.sec-intro{ max-width:560px; line-height:1.72 }
 
 /* --- Paths --- */
 .path{
   border:1px solid var(--ink);
-  padding:48px 40px;
+  padding:46px 40px;
   background:#FFF;
 }
 .path.recommended{ background:var(--ink); color:#FFF; border-color:var(--ink) }
@@ -793,7 +794,7 @@ section.block{ border-bottom:1px solid var(--ink); padding:128px 0 }
 .path.recommended h3 em{ color:var(--gold-soft) }
 .path .pathnum{ margin-bottom:20px }
 .path .pathnum .pill{ border-radius:0; border-color:var(--gold-soft); color:var(--gold-soft) }
-.path:hover{ transform:none; box-shadow:0 0 0 2px var(--ink) inset }
+.path:hover{ transform:none; box-shadow:0 0 0 1px var(--ink) inset }
 .path li{ font-family:var(--sans); border-color:var(--line-2) }
 .path li::before{ background:var(--gold); width:6px; height:1px; border-radius:0; transform:none; align-self:center }
 
@@ -813,43 +814,43 @@ section.block{ border-bottom:1px solid var(--ink); padding:128px 0 }
 /* --- About --- */
 .portrait{ border:1px solid var(--ink); border-radius:0; background:var(--bg-soft) }
 .portrait .placeholder-label{ font-family:var(--mono) }
-.about h3{ font-size:clamp(40px, 5vw, 72px); font-weight:700; letter-spacing:-0.04em; text-transform:uppercase; margin-bottom:16px }
+.about h3{ font-size:clamp(34px, 4.2vw, 56px); font-weight:620; letter-spacing:-0.03em; text-transform:none; margin-bottom:16px }
 .about h3 em{ color:var(--gold); font-weight:500 }
 .about .role{ font-family:var(--mono); color:var(--gold); margin-bottom:32px }
-.about .creds{ border-top:1px solid var(--ink); padding-top:32px }
+.about .creds{ border-top:1px solid var(--ink); padding-top:36px; margin-top:42px }
 .cred .cval{ font-family:var(--display); font-weight:600; font-size:20px; letter-spacing:-0.02em }
 .specs .chip{ border:1px solid var(--ink) }
 .specs .chip:hover{ background:var(--ink); color:#FFF; border-color:var(--ink) }
 
 /* --- Approach --- */
 .step{ border-top:1px solid var(--ink); padding-top:32px }
-.step .stepnum{ font-family:var(--display); font-weight:800; font-size:80px; color:var(--ink); letter-spacing:-0.05em }
+.step .stepnum{ font-family:var(--display); font-weight:700; font-size:62px; color:var(--ink); letter-spacing:-0.04em }
 .step .stepnum em{ font-style:normal; font-weight:500; color:var(--gold) }
-.step h4{ margin-top:8px }
+.step h4{ margin-top:10px }
 
 /* --- Quote block: pure dark --- */
-.quote-block{ background:var(--ink); padding:160px 0; border-bottom:1px solid var(--ink) }
+.quote-block{ background:var(--ink); padding:148px 0; border-bottom:1px solid var(--ink) }
 .quote-block blockquote{
   font-family:var(--display);
-  font-weight:500;
+  font-weight:450;
   font-style:normal;
-  font-size:clamp(32px, 5vw, 64px);
-  line-height:1.04;
-  letter-spacing:-0.03em;
+  font-size:clamp(30px, 4.2vw, 52px);
+  line-height:1.14;
+  letter-spacing:-0.024em;
   text-transform:none;
 }
 .quote-block blockquote em{ color:var(--gold-soft); font-style:normal; font-weight:300; background:none }
-.quote-block .qmark{ font-family:var(--display); color:var(--gold); font-size:120px; font-style:normal; font-weight:500 }
-.quote-block cite{ font-family:var(--mono); color:#A0A0A8 }
+.quote-block .qmark{ font-family:var(--display); color:var(--gold); font-size:104px; font-style:normal; font-weight:500 }
+.quote-block cite{ font-family:var(--mono); color:#A0A0A8; margin-top:32px }
 
 /* --- FAQ --- */
 .faq-list{ border-top:1px solid var(--ink) }
 .faq-q{
   font-family:var(--display);
   font-style:normal;
-  font-weight:600;
-  font-size:22px;
-  letter-spacing:-0.02em;
+  font-weight:550;
+  font-size:20px;
+  letter-spacing:-0.016em;
   text-transform:none;
 }
 .faq-q:hover{ color:var(--gold) }
@@ -859,10 +860,10 @@ section.block{ border-bottom:1px solid var(--ink); padding:128px 0 }
 /* --- Contact --- */
 .contact h2{
   font-family:var(--display);
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:-0.045em;
-  font-size:clamp(48px,6vw,96px);
+  font-weight:620;
+  text-transform:none;
+  letter-spacing:-0.032em;
+  font-size:clamp(38px,5vw,62px);
 }
 .ci-item{ border-top:1px solid var(--ink); padding-top:18px }
 .ci-item .ki{ font-family:var(--mono); color:var(--gold) }
@@ -898,9 +899,62 @@ footer .logo .dot{ background:var(--gold) }
 .notice{ border-left:3px solid var(--gold); background:var(--bg-soft) }
 .post-card{ border:1px solid var(--ink) }
 .post-card:hover{ background:var(--bg-soft); transform:none; box-shadow:0 0 0 2px var(--ink) inset }
+
+/* --- Meer lucht in contentblokken --- */
+.content-card,
+.post-card,
+.hero-card,
+.lead-card,
+.conversion-card,
+.result-panel,
+.testimonial-panel{
+  padding:40px 38px;
+}
+
+.content-card p,
+.content-card li,
+.path p,
+.service p,
+.topic p,
+.about p,
+.contact .lede,
+.lead-card p,
+.result-list p{
+  line-height:1.8;
+}
+
+.content-card p + p,
+.about p + p{
+  margin-top:20px;
+}
+
+.hero-actions,
+.hero-points,
+.proof-stack,
+.result-list,
+.post-list,
+.split-cards{
+  gap:20px;
+}
+
+@media (max-width:720px){
+  h1.display{ font-size:44px; line-height:0.98; letter-spacing:-0.032em }
+  h2.section-title, .page-title{ font-size:32px; line-height:1.04 }
+  .content-card,
+  .post-card,
+  .hero-card,
+  .lead-card,
+  .conversion-card,
+  .result-panel,
+  .testimonial-panel{ padding:28px 22px }
+  .hero-lede,
+  .page-intro,
+  .sec-intro{ line-height:1.72 }
+  .hero-actions{ gap:14px }
+  .sec-head{ margin-bottom:40px }
+}
 .post-card .tag{ color:var(--gold) }
 
 /* --- Reveal subtieler --- */
 .reveal{ opacity:0; transform:none; transition:opacity .8s ease }
 .reveal.in{ opacity:1 }
-
