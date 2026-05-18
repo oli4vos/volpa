@@ -101,3 +101,67 @@ Omdat deze site meerdere HTML-pagina's en een `assets/` map gebruikt, staat er o
 
 - De juridische pagina's zijn nu placeholders en moeten nog inhoudelijk/juridisch worden gecontroleerd voor livegang.
 - Het formulier is nog steeds een demoformulier. Voor echte verzending kun je later bijvoorbeeld Formspree of een server-side endpoint koppelen.
+
+## Formulieren en leadverwerking
+
+De site gebruikt nu een centrale formulierlaag via:
+
+- `assets/js/forms-config.js`
+- `assets/js/forms.js`
+
+Huidige standaard:
+
+- `mode: "mailto"`
+- formulieren openen dus standaard het mailprogramma van de bezoeker
+- dit werkt zonder backend, secrets of database
+
+Formulieren:
+
+- `contact.html`
+  Uitgebreid intakeformulier voor kennismakingen, second opinions en inhoudelijke vragen.
+- `leadpagina.html`
+  Kort intakeformulier voor laagdrempelige eerste aanvragen.
+- `index.html`
+  Behoudt een compact homepageformulier.
+- `bedankt.html`
+  Noindex-bedanktpagina voor endpoint- of testverwerking. Bij `mailto` wordt niet automatisch doorgestuurd.
+
+Later Formspree koppelen:
+
+1. Maak in Formspree een formulier aan
+2. Neem het publieke endpoint over, bijvoorbeeld:
+   `https://formspree.io/f/FORM_ID`
+3. Pas in `assets/js/forms-config.js` aan:
+
+```js
+window.VOLPA_FORMS = {
+  mode: "form-endpoint",
+  provider: "formspree",
+  endpoint: "https://formspree.io/f/FORM_ID"
+};
+```
+
+Belangrijk:
+
+- zet geen API-keys of secrets in de frontend
+- gebruik alleen een publiek formulierendpoint
+- vraag via formulieren geen zeer gevoelige documenten of dossierstukken op
+
+Testen:
+
+```bash
+node --check assets/js/forms-config.js
+node --check assets/js/forms.js
+node --check scripts/validate-forms-config.js
+npm run validate:forms
+python3 -m http.server 8000
+```
+
+Controleer daarna minimaal:
+
+- `contact.html`
+- `leadpagina.html`
+- `bedankt.html`
+- homepageformulier op `index.html`
+
+Voor lokale tests zonder netwerk of mailclient kun je tijdelijk `mode: "test"` gebruiken in `assets/js/forms-config.js`.

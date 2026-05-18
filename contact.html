@@ -49,9 +49,9 @@
 <section class="page-hero">
   <div class="container">
     <div class="sec-num">Volpa · Contact</div>
-    <h1 class="page-title">Een eerste gesprek kan <em>eenvoudig beginnen</em>.</h1>
+    <h1 class="page-title">Bespreek uw situatie in een <em>rustig eerste contact</em>.</h1>
     <p class="page-intro">
-      Deze losse contactpagina maakt het straks makkelijker om campagnes, advertenties of CTA-knoppen direct op één duidelijke bestemming te laten uitkomen.
+      Gebruik dit formulier voor een kennismaking, een vraag over begeleiding of een verzoek om mee te kijken naar uw situatie. Volpa gebruikt uw gegevens alleen om op uw aanvraag te reageren.
     </p>
   </div>
 </section>
@@ -61,8 +61,8 @@
     <div class="contact">
       <div>
         <div class="sec-num">Contactgegevens</div>
-        <h2>Even <em>praten?</em></h2>
-        <p class="lede">Een eerste gesprek van 30 minuten is kosteloos en nergens toe verplicht. Bel, mail of laat hieronder iets achter — we nemen dezelfde of de eerstvolgende werkdag contact op.</p>
+        <h2>Een eerste stap <em>zonder druk</em>.</h2>
+        <p class="lede">Een eerste gesprek is bedoeld om te verhelderen wat er speelt en welke vorm van begeleiding past. Gebruik dit formulier niet voor spoed en deel geen zeer gevoelige documenten of dossierstukken. Volpa neemt contact op om uw vraag rustig te bespreken.</p>
 
         <div class="contact-info">
           <div class="ci-item">
@@ -88,44 +88,63 @@
         </div>
       </div>
 
-      <form class="form" data-mailto-form data-form-subject="Nieuwe contactaanvraag via volpa.nl">
-        <div class="row">
-          <div class="field">
-            <label for="contact-fname">Voornaam</label>
-            <input id="contact-fname" name="voornaam" type="text" required placeholder="Mijn naam is…" />
-          </div>
-          <div class="field">
-            <label for="contact-lname">Achternaam</label>
-            <input id="contact-lname" name="achternaam" type="text" required placeholder="…" />
-          </div>
+      <form class="form" data-volpa-form="contact" data-form-name="contact" data-form-subject="Nieuwe contactaanvraag via Volpa" novalidate>
+        <div class="field">
+          <label for="contact-name">Naam</label>
+          <input id="contact-name" name="naam" type="text" required placeholder="Uw naam" />
         </div>
         <div class="row">
           <div class="field">
-            <label for="contact-mail">E-mail</label>
+            <label for="contact-mail">E-mailadres</label>
             <input id="contact-mail" name="email" type="email" required placeholder="naam@example.nl" />
           </div>
           <div class="field">
-            <label for="contact-tel">Telefoon (optioneel)</label>
+            <label for="contact-tel">Telefoonnummer (optioneel)</label>
             <input id="contact-tel" name="telefoon" type="tel" placeholder="06 ..." />
           </div>
         </div>
-        <div class="field">
-          <label for="contact-onderwerp">Waar wil je over praten?</label>
-          <select id="contact-onderwerp" name="onderwerp">
-            <option>Een eerste oriëntatie</option>
-            <option>Mediation starten</option>
-            <option>Financieel doorrekenen</option>
-            <option>Iets anders</option>
-          </select>
+        <div class="row">
+          <div class="field">
+            <label for="contact-type">Type aanvraag</label>
+            <select id="contact-type" name="type_aanvraag" required>
+              <option value="">Kies een onderwerp</option>
+              <option value="kennismaking">Kennismaking</option>
+              <option value="scheidingsbegeleiding">Scheidingsbegeleiding</option>
+              <option value="mediation">Mediation</option>
+              <option value="financieel-advies">Financieel advies</option>
+              <option value="juridische-begeleiding">Juridische begeleiding</option>
+              <option value="second-opinion">Second opinion</option>
+              <option value="anders">Anders</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="contact-preference">Voorkeurscontact</label>
+            <select id="contact-preference" name="voorkeurscontact" required>
+              <option value="">Kies een voorkeur</option>
+              <option value="e-mail">E-mail</option>
+              <option value="telefoon">Telefoon</option>
+            </select>
+          </div>
         </div>
         <div class="field">
-          <label for="contact-bericht">Korte toelichting</label>
-          <textarea id="contact-bericht" name="bericht" required placeholder="Wat is er gaande? Een paar zinnen volstaan."></textarea>
+          <label for="contact-bericht">Situatie in het kort</label>
+          <textarea id="contact-bericht" name="toelichting" required placeholder="Omschrijf in enkele zinnen waar u nu tegenaan loopt."></textarea>
+          <span class="field-hint">Houd het beknopt. Deel liever nog geen zeer gevoelige documenten of uitgebreide dossierinformatie.</span>
+        </div>
+        <div class="field hp-field" aria-hidden="true">
+          <label for="contact-company">Laat dit veld leeg</label>
+          <input id="contact-company" name="bedrijf" type="text" tabindex="-1" autocomplete="off" data-volpa-honeypot />
+        </div>
+        <div class="field field-checkbox">
+          <label class="check-row" for="contact-consent">
+            <input id="contact-consent" name="privacy_akkoord" type="checkbox" required data-form-ignore />
+            <span>Ik begrijp dat mijn gegevens worden gebruikt om contact met mij op te nemen over mijn aanvraag.</span>
+          </label>
         </div>
         <button type="submit" class="btn btn-primary submit">
-          Stuur bericht <span class="arr">→</span>
+          Verstuur aanvraag <span class="arr">→</span>
         </button>
-        <span class="form-meta">We reageren dezelfde of de eerstvolgende werkdag. Vertrouwelijk — altijd.</span>
+        <span class="form-meta">Geen spoedkanaal. Volpa reageert zo snel mogelijk om uw vraag te bespreken en de juiste vervolgstap te bepalen.</span>
         <p class="form-status" aria-live="polite"></p>
       </form>
     </div>
@@ -184,6 +203,8 @@
 </footer>
 
 <script src="arnoud-data.js"></script>
+<script src="assets/js/forms-config.js"></script>
+<script src="assets/js/forms.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

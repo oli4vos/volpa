@@ -43,7 +43,7 @@
       <a href="blog.html">Blog</a>
     </nav>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu">Menu</button>
-    <a href="leadpagina.html#intake" class="nav-cta">
+    <a href="leadpagina.html?type=kennismaking#intake" class="nav-cta">
       Vrijblijvende intake
       <span class="arr">→</span>
     </a>
@@ -66,7 +66,7 @@
           Zodat jullie afspraken kunnen maken die ook over tien jaar nog kloppen.
         </p>
         <div class="hero-actions">
-          <a href="leadpagina.html#intake" class="btn btn-primary">Plan een kennismaking <span class="arr">→</span></a>
+          <a href="leadpagina.html?type=kennismaking#intake" class="btn btn-primary">Plan een kennismaking <span class="arr">→</span></a>
           <a href="#aanpak" class="btn btn-ghost">Zo werken we</a>
         </div>
       </div>
@@ -407,7 +407,7 @@
         </div>
       </div>
 
-      <form class="form" data-mailto-form data-form-subject="Nieuwe aanvraag via volpa.nl">
+      <form class="form" data-volpa-form="homepage" data-form-name="homepage" data-form-subject="Nieuwe aanvraag via volpa.nl" novalidate>
         <div class="row">
           <div class="field">
             <label for="fname">Voornaam</label>
@@ -440,6 +440,16 @@
         <div class="field">
           <label for="bericht">Korte toelichting</label>
           <textarea id="bericht" name="bericht" required placeholder="Wat is er gaande? Een paar zinnen volstaan."></textarea>
+        </div>
+        <div class="field hp-field" aria-hidden="true">
+          <label for="home-company">Laat dit veld leeg</label>
+          <input id="home-company" name="bedrijf" type="text" tabindex="-1" autocomplete="off" data-volpa-honeypot />
+        </div>
+        <div class="field field-checkbox">
+          <label class="check-row" for="home-consent">
+            <input id="home-consent" name="privacy_akkoord" type="checkbox" required data-form-ignore />
+            <span>Ik begrijp dat mijn gegevens worden gebruikt om contact met mij op te nemen over mijn aanvraag.</span>
+          </label>
         </div>
         <button type="submit" class="btn btn-primary submit">
           Stuur bericht <span class="arr">→</span>
@@ -474,7 +484,7 @@
       <div>
         <h5>Volpa</h5>
         <ul>
-          <li><a href="leadpagina.html">Vrijblijvende intake</a></li>
+          <li><a href="leadpagina.html?type=kennismaking#intake">Vrijblijvende intake</a></li>
           <li><a href="over-arnoud.html">Over Arnoud</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="kennisbank-scheiden.html">Kennisbank scheiden</a></li>
@@ -504,6 +514,8 @@
 </footer>
 
 <script src="arnoud-data.js"></script>
+<script src="assets/js/forms-config.js"></script>
+<script src="assets/js/forms.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

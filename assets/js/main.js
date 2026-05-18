@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaq();
   initReveal();
   initSmoothScroll();
-  initMailtoForms();
+  initVolpaForms();
   initBlogSystem();
 });
 
@@ -443,6 +443,15 @@ function initSmoothScroll() {
   });
 }
 
+function initVolpaForms() {
+  if (window.VolpaForms && typeof window.VolpaForms.init === "function") {
+    window.VolpaForms.init();
+    return;
+  }
+
+  initMailtoForms();
+}
+
 function initMailtoForms() {
   document.querySelectorAll("[data-mailto-form]").forEach((form) => {
     form.addEventListener("submit", (event) => {
@@ -656,9 +665,9 @@ function renderBlogIndex(posts) {
           <a href="${escapeHtml(getBlogPageHref(featuredPost))}" class="btn btn-primary">Lees artikel <span class="arr">→</span></a>
         </div>
         <div class="blog-featured-note">
-          <strong>Eenvoudig publicatiemodel</strong>
-          <p>Eén tekstbestand voedt de overzichtspagina en alle losse artikelen. Dat maakt publiceren voorspelbaar en onderhoudbaar.</p>
-          <a href="blog-aanleveren.html" class="btn btn-ghost">Nieuw artikel aanleveren</a>
+          <strong>Van artikel naar gesprek</strong>
+          <p>Een blogartikel helpt om richting te krijgen. Voor uw eigen situatie is een eerste gesprek vaak de snelste manier om duidelijkheid te krijgen.</p>
+          <a href="contact.html?type=kennismaking" class="btn btn-ghost">Bespreek uw situatie</a>
         </div>
       </div>
     `;

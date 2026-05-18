@@ -44,7 +44,7 @@
     </nav>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu">Menu</button>
     <a href="#intake" class="nav-cta">
-      Plan intake
+      Plan een kennismaking
       <span class="arr">→</span>
     </a>
   </div>
@@ -65,7 +65,7 @@
         </p>
         <div class="hero-actions">
           <a href="#intake" class="btn btn-primary">Plan een vrijblijvende intake <span class="arr">→</span></a>
-          <a href="tel:+31651214752" class="btn btn-ghost" data-bind-telefoon>Bel direct</a>
+          <a href="contact.html" class="btn btn-ghost">Uitgebreidere vraag</a>
         </div>
         <div class="hero-points">
           <div class="hero-point">
@@ -87,9 +87,9 @@
         <div class="lead-card">
           <span class="lead-kicker">Vrijblijvende intake</span>
           <h2>Vraag direct een eerste gesprek aan</h2>
-          <p>Laat kort weten waar jullie staan. Volpa reageert dezelfde of de eerstvolgende werkdag.</p>
+          <p>Laat kort weten waar uw vraag over gaat. Voor een uitgebreidere toelichting of meerdere onderwerpen gebruikt u beter de contactpagina.</p>
 
-          <form class="form form-tight" data-mailto-form data-form-subject="Aanvraag vrijblijvende intake via volpa.nl">
+          <form class="form form-tight" data-volpa-form="lead" data-form-name="lead" data-form-subject="Aanvraag vrijblijvende intake via Volpa" novalidate>
             <div class="field">
               <label for="lead-name">Naam</label>
               <input id="lead-name" name="naam" type="text" required placeholder="Jouw naam" />
@@ -99,19 +99,40 @@
               <input id="lead-email" name="email" type="email" required placeholder="naam@example.nl" />
             </div>
             <div class="field">
-              <label for="lead-phone">Telefoon</label>
-              <input id="lead-phone" name="telefoon" type="tel" placeholder="06 ..." />
+              <label for="lead-type">Type vraag</label>
+              <select id="lead-type" name="type_vraag" required>
+                <option value="">Kies een onderwerp</option>
+                <option value="kennismaking">Kennismaking</option>
+                <option value="scheidingsbegeleiding">Scheidingsbegeleiding</option>
+                <option value="mediation">Mediation</option>
+                <option value="financieel-advies">Financieel advies</option>
+                <option value="juridische-begeleiding">Juridische begeleiding</option>
+                <option value="second-opinion">Second opinion</option>
+                <option value="anders">Anders</option>
+              </select>
             </div>
             <div class="field">
-              <label for="lead-situation">Situatie</label>
-              <textarea id="lead-situation" name="situatie" required placeholder="Waar lopen jullie nu tegenaan?"></textarea>
+              <label for="lead-situation">Korte toelichting</label>
+              <textarea id="lead-situation" name="toelichting" required placeholder="Vertel kort waar uw vraag over gaat."></textarea>
+            </div>
+            <div class="field hp-field" aria-hidden="true">
+              <label for="lead-company">Laat dit veld leeg</label>
+              <input id="lead-company" name="bedrijf" type="text" tabindex="-1" autocomplete="off" data-volpa-honeypot />
+            </div>
+            <div class="field field-checkbox">
+              <label class="check-row" for="lead-consent">
+                <input id="lead-consent" name="privacy_akkoord" type="checkbox" required data-form-ignore />
+                <span>Ik begrijp dat mijn gegevens worden gebruikt om contact met mij op te nemen over mijn aanvraag.</span>
+              </label>
             </div>
             <button type="submit" class="btn btn-primary submit">
               Vraag intake aan <span class="arr">→</span>
             </button>
-            <p class="form-meta">Na verzenden opent je e-mailapp met een ingevuld bericht aan Volpa.</p>
+            <p class="form-meta">Kort en laagdrempelig. Geen spoedkanaal en liever nog geen zeer gevoelige documenten via dit formulier.</p>
             <p class="form-status" aria-live="polite"></p>
           </form>
+
+          <p class="form-meta">Wilt u meer context meegeven of meerdere vragen combineren? Gebruik dan de <a href="contact.html">contactpagina</a>.</p>
 
           <div class="lead-direct">
             <a href="tel:+31651214752" class="lead-direct-item">
@@ -425,6 +446,8 @@
 </footer>
 
 <script src="arnoud-data.js"></script>
+<script src="assets/js/forms-config.js"></script>
+<script src="assets/js/forms.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -2,6 +2,8 @@
   "scripts": {
     "generate:blog": "node scripts/generate-blog-pages.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
-    "build:static": "node scripts/generate-blog-pages.js && node scripts/generate-sitemap.js"
+    "generate:llms": "node scripts/generate-llms.js",
+    "validate:forms": "node scripts/validate-forms-config.js",
+    "build:static": "node scripts/generate-blog-pages.js && node scripts/generate-sitemap.js && node scripts/generate-llms.js"
   }
 }

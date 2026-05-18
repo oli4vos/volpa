@@ -6,6 +6,37 @@ const ROOT_DIR = path.resolve(__dirname, "..");
 const BLOG_SOURCE_PATH = path.join(ROOT_DIR, "content", "blog-posts.txt");
 const BLOG_OUTPUT_DIR = path.join(ROOT_DIR, "blog");
 const SITEMAP_PATH = path.join(ROOT_DIR, "sitemap.xml");
+const LLMS_PATH = path.join(ROOT_DIR, "llms.txt");
+
+const PRIMARY_PAGE_ENTRIES = [
+  { path: "", file: "index.html", label: "Home", llmsDescription: "Introductie van Volpa en de combinatie van mediation, financiele begeleiding en juridische afwikkeling." },
+  { path: "mediation.html", file: "mediation.html", label: "Mediation", llmsDescription: "Begeleiding bij gesprekken en afspraken rond scheiding." },
+  { path: "financieel-advies.html", file: "financieel-advies.html", label: "Financieel advies", llmsDescription: "Inzicht in woonlasten, alimentatie, pensioen, vermogen en haalbare afspraken." },
+  { path: "juridische-begeleiding.html", file: "juridische-begeleiding.html", label: "Juridische begeleiding", llmsDescription: "Afspraken, convenant, ouderschapsplan en juridische aandachtspunten." },
+  { path: "over-arnoud.html", file: "over-arnoud.html", label: "Over Arnoud", llmsDescription: "Achtergrond van Arnoud Vos en de werkwijze van Volpa." },
+  { path: "contact.html", file: "contact.html", label: "Contact", llmsDescription: "Contact opnemen voor een eerste gesprek." }
+];
+
+const KNOWLEDGE_PAGE_ENTRIES = [
+  { path: "kennisbank-scheiden.html", file: "kennisbank-scheiden.html", label: "Kennisbank scheiden", llmsDescription: "Overzicht van uitlegpagina's over scheiding en begeleiding." },
+  { path: "scheiden/mediation-of-financiele-scheidingsbegeleiding.html", file: "scheiden/mediation-of-financiele-scheidingsbegeleiding.html", label: "Mediation of financiele scheidingsbegeleiding", llmsDescription: "Verschil tussen mediation en financiele begeleiding." },
+  { path: "scheiden/wat-is-financiele-scheidingsbegeleiding.html", file: "scheiden/wat-is-financiele-scheidingsbegeleiding.html", label: "Wat is financiele scheidingsbegeleiding", llmsDescription: "Uitleg over alimentatie, woning, pensioen, vermogen en scenario's." },
+  { path: "scheiden/wat-is-pendelmediation.html", file: "scheiden/wat-is-pendelmediation.html", label: "Wat is pendelmediation", llmsDescription: "Begeleiding wanneer rechtstreeks overleg lastig is." },
+  { path: "scheiden/scheiden-met-koophuis.html", file: "scheiden/scheiden-met-koophuis.html", label: "Scheiden met een koophuis", llmsDescription: "Over woning, hypotheek, overwaarde, uitkoop en betaalbaarheid." },
+  { path: "scheiden/second-opinion-scheidingsconvenant.html", file: "scheiden/second-opinion-scheidingsconvenant.html", label: "Second opinion scheidingsconvenant", llmsDescription: "Controle op financiele uitvoerbaarheid en samenhang van afspraken." },
+  { path: "scheiden/partneralimentatie-berekenen.html", file: "scheiden/partneralimentatie-berekenen.html", label: "Partneralimentatie berekenen", llmsDescription: "Uitleg over behoefte, draagkracht, inkomen en haalbare afspraken." },
+  { path: "scheiden/ouderschapsplan-maken.html", file: "scheiden/ouderschapsplan-maken.html", label: "Ouderschapsplan maken", llmsDescription: "Over zorgverdeling, communicatie en praktische afspraken voor kinderen." },
+  { path: "scheiden/scheidingsconvenant-controleren.html", file: "scheiden/scheidingsconvenant-controleren.html", label: "Scheidingsconvenant controleren", llmsDescription: "Vooraf toetsen van afspraken op gevolgen, samenhang en uitvoerbaarheid." },
+  { path: "scheiden/woning-overnemen-na-scheiding.html", file: "scheiden/woning-overnemen-na-scheiding.html", label: "Woning overnemen na scheiding", llmsDescription: "Over uitkoop, hypotheek, betaalbaarheid en fiscale aandachtspunten." }
+];
+
+const AUXILIARY_PAGE_ENTRIES = [
+  { path: "blog.html", file: "blog.html" },
+  { path: "leadpagina.html", file: "leadpagina.html" },
+  { path: "privacy.html", file: "privacy.html" },
+  { path: "voorwaarden.html", file: "voorwaarden.html" },
+  { path: "cookies.html", file: "cookies.html" }
+];
 
 function loadSeoConfig() {
   const source = fs.readFileSync(path.join(ROOT_DIR, "assets", "js", "seo-config.js"), "utf8");
@@ -321,7 +352,7 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
       <a href="../blog.html" aria-current="page">Blog</a>
     </nav>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu">Menu</button>
-    <a href="../contact.html" class="nav-cta">Even praten <span class="arr">-&gt;</span></a>
+    <a href="../contact.html?type=kennismaking" class="nav-cta">Bespreek uw situatie <span class="arr">-&gt;</span></a>
   </div>
 </header>
 
@@ -346,6 +377,11 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
     <aside class="content-card article-side">
       <h4>Verder lezen</h4>
       <ul class="link-list">${renderRelatedPosts(post, posts)}</ul>
+      <div class="cta-panel">
+        <span class="cta-label">Vervolg</span>
+        <p class="cta-copy">Wilt u weten wat dit onderwerp in uw eigen situatie betekent? Gebruik dan het contactformulier voor een eerste verhelderend gesprek.</p>
+        <a href="../contact.html?type=kennismaking" class="btn btn-primary">Bespreek uw situatie</a>
+      </div>
       <div class="notice">Dit artikel is statisch gegenereerd vanuit <code>content/blog-posts.txt</code> en houdt dezelfde inhoudsbron aan als het bestaande blog.</div>
       <a href="../${escapeHtml(getBlogFallbackPath(post.slug))}" class="back-link">Fallback-versie openen</a>
     </aside>
@@ -378,7 +414,6 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
           <li><a href="../over-arnoud.html">Over Arnoud</a></li>
           <li><a href="../blog.html" aria-current="page">Blog</a></li>
           <li><a href="../kennisbank-scheiden.html">Kennisbank scheiden</a></li>
-          <li><a href="../blog-aanleveren.html">Blog aanleveren</a></li>
           <li><a href="../contact.html">Contact</a></li>
         </ul>
       </div>
@@ -412,23 +447,10 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
 
 function getFixedPageEntries() {
   return [
-    { path: "", file: "index.html" },
-    { path: "mediation.html", file: "mediation.html" },
-    { path: "financieel-advies.html", file: "financieel-advies.html" },
-    { path: "juridische-begeleiding.html", file: "juridische-begeleiding.html" },
-    { path: "over-arnoud.html", file: "over-arnoud.html" },
-    { path: "contact.html", file: "contact.html" },
+    ...PRIMARY_PAGE_ENTRIES.map(({ path, file }) => ({ path, file })),
     { path: "blog.html", file: "blog.html" },
-    { path: "kennisbank-scheiden.html", file: "kennisbank-scheiden.html" },
-    { path: "scheiden/mediation-of-financiele-scheidingsbegeleiding.html", file: "scheiden/mediation-of-financiele-scheidingsbegeleiding.html" },
-    { path: "scheiden/wat-is-financiele-scheidingsbegeleiding.html", file: "scheiden/wat-is-financiele-scheidingsbegeleiding.html" },
-    { path: "scheiden/wat-is-pendelmediation.html", file: "scheiden/wat-is-pendelmediation.html" },
-    { path: "scheiden/scheiden-met-koophuis.html", file: "scheiden/scheiden-met-koophuis.html" },
-    { path: "scheiden/second-opinion-scheidingsconvenant.html", file: "scheiden/second-opinion-scheidingsconvenant.html" },
-    { path: "leadpagina.html", file: "leadpagina.html" },
-    { path: "privacy.html", file: "privacy.html" },
-    { path: "voorwaarden.html", file: "voorwaarden.html" },
-    { path: "cookies.html", file: "cookies.html" }
+    ...KNOWLEDGE_PAGE_ENTRIES.map(({ path, file }) => ({ path, file })),
+    ...AUXILIARY_PAGE_ENTRIES
   ];
 }
 
@@ -469,11 +491,15 @@ ${body}
 module.exports = {
   BLOG_OUTPUT_DIR,
   BLOG_SOURCE_PATH,
+  KNOWLEDGE_PAGE_ENTRIES,
+  LLMS_PATH,
+  PRIMARY_PAGE_ENTRIES,
   ROOT_DIR,
   SITEMAP_PATH,
   absoluteUrl,
   generateSitemapXml,
   getBlogStaticPath,
+  getFixedPageEntries,
   loadSeoConfig,
   parseBlogPosts,
   readBlogPosts,
