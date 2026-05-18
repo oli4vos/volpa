@@ -601,6 +601,9 @@ body > *{
 .hero{
   padding-top:96px;
   padding-bottom:86px;
+  background:
+    linear-gradient(180deg, rgba(251,247,239,0.08), rgba(251,247,239,0)),
+    radial-gradient(circle at 88% 0%, rgba(178,111,80,0.12), transparent 24%);
 }
 
 .hero-grid{
