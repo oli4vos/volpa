@@ -5,6 +5,11 @@
    Arnoud's gegevens, certificeringen, opleidingen, contact-
    informatie en cijfers op de site bij te werken.
 
+   Alleen informatie opnemen die zeker is.
+   Wat nog niet zeker of nog niet gecontroleerd is:
+   - laat je leeg
+   - of markeer je hieronder met een commentaar "Nog in te vullen"
+
    Sla op, ververs de pagina — klaar.
 
    Belangrijke regels:
@@ -20,7 +25,7 @@ window.VOLPA = {
   naam:        "Arnoud Vos",
   rol:         "Financieel scheidingsspecialist · Register Erkend Scheidingsadviseur (RES®) · Certified Financial Planner (CFP®)",
   werkgebied:  "Primair regio Arnhem, Nijmegen en Doetinchem · landelijk voor ondernemers en DGA's",
-  sinds:       2011,
+  sinds:       "", // Nog in te vullen
   footerPitch: "Volpa is de financieel scheidingsspecialist bij scheiding met vermogen. Wij brengen voor beide partners het volledige financiële plaatje in kaart, zodat afspraken eerlijk, uitvoerbaar en toekomstbestendig worden.",
 
   /* --- Bio: één paragraaf per regel --- */
@@ -38,7 +43,7 @@ window.VOLPA = {
     whatsapp:       "31651214752",           // landcode + nummer, zonder + of 0
     adres:          "Martinusweg 17 — Zevenaar",
     bereikbaar:     "Ma–Vr · 09:00 – 18:00 Avonden op afspraak",
-    linkedin:       "https://www.linkedin.com/in/arnoud-volpa"
+    linkedin:       "" // Nog in te vullen
   },
 
   /* --- Certificeringen ---
@@ -63,23 +68,23 @@ window.VOLPA = {
 
   /* --- Cijfers in de hero --- */
   stats: {
-    ervaringJaren:      14,
+    ervaringJaren:      null, // Nog in te vullen
     kennismakingKeuzePct: 97,
     tevredenheidPct:    99,
-    gesprekkenRange:    "4–6"
+    gesprekkenRange:    "2 inhoudelijke gesprekken + ondertekeningsafspraak"
   },
 
-  /* --- Opleidingen --- */
+  /* --- Opleidingen ---
+     Concrete instellingen en jaartallen: nog in te vullen. */
   opleidingen: [
     { jaar: "", titel: "Bedrijfskundig geschoold", instelling: "" },
-    { jaar: "", titel: "Bedrijfseconomisch geschoold", instelling: "" },
-    { jaar: "", titel: "Permanent actief in financiële, fiscale en scheidingsspecifieke werkmethodiek", instelling: "" }
+    { jaar: "", titel: "Bedrijfseconomisch geschoold", instelling: "" }
   ],
 
-  /* --- Publicaties --- */
+  /* --- Publicaties ---
+     Alleen publicaties opnemen die echt gecontroleerd zijn. */
   publicaties: [
-    { jaar: "", titel: "Kennisartikelen over scheiden, vermogen, pensioen en belastingaangifte", medium: "Volpa kennisbank en blog" },
-    { jaar: "", titel: "Praktische tools en werkprocessen voor scheidingsdossiers", medium: "Interne Volpa-methodiek" }
+    { jaar: "", titel: "Kennisartikelen over scheiden, vermogen, pensioen en belastingaangifte", medium: "Volpa kennisbank en blog" }
   ]
 
 };
