@@ -46,6 +46,8 @@ function loadSeoConfig() {
 
   return Object.assign({
     siteUrl: "https://oli4vos.github.io/volpa/",
+    isStaging: true,
+    defaultPublicRobots: "noindex,follow",
     siteName: "Volpa",
     defaultOgImagePath: "assets/img/og-default.svg",
     personName: "Arnoud Vos",
@@ -312,7 +314,7 @@ function renderStaticBlogPage(post, posts, config) {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>${escapeHtml(`${post.title} | ${config.siteName}`)}</title>
 <meta name="description" content="${escapeHtml(articleDescription)}" />
-<meta name="robots" content="index,follow" />
+<meta name="robots" content="${escapeHtml(config.defaultPublicRobots || "index,follow")}" />
 <link rel="canonical" href="${escapeHtml(articleUrl)}" data-seo-path="${escapeHtml(articlePath)}" />
 <meta property="og:locale" content="nl_NL" />
 <meta property="og:site_name" content="${escapeHtml(config.siteName)}" />

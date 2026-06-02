@@ -17,7 +17,7 @@
 window.VOLPA = {
 
   /* --- Persoonlijk --- */
-  naam:        "Arnoud Volpa",
+  naam:        "Arnoud Vos",
   rol:         "Oprichter · RFEA-echtscheidings adviseur · vFAS-lid",
   werkgebied:  "Noord-Holland, Utrecht, Gelderland — online afspraken altijd mogelijk",
   sinds:       2011,

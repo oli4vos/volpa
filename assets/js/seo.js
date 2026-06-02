@@ -10,6 +10,7 @@
 
   const config = Object.assign({}, defaults, window.VOLPA_SEO_CONFIG || {});
   config.siteUrl = ensureTrailingSlash(config.siteUrl);
+  config.defaultPublicRobots = config.defaultPublicRobots || "index,follow";
 
   function ensureTrailingSlash(url) {
     return url.endsWith("/") ? url : `${url}/`;
@@ -70,9 +71,22 @@
     });
   }
 
-  function shouldSkipStructuredData() {
+  function getRobotsContent() {
     const robots = getMeta('meta[name="robots"]');
-    return robots && /noindex/i.test(robots.content || "");
+    return (robots && robots.content ? robots.content : "").toLowerCase();
+  }
+
+  function applyDefaultPublicRobots() {
+    const current = getRobotsContent();
+    if (current.includes("nofollow")) {
+      return;
+    }
+
+    setMeta("name", "robots", config.defaultPublicRobots);
+  }
+
+  function shouldSkipStructuredData() {
+    return /noindex/i.test(getRobotsContent());
   }
 
   function buildSiteStructuredData() {
@@ -245,7 +259,7 @@
 
     document.title = title;
     setMeta("name", "description", description);
-    setMeta("name", "robots", "index,follow");
+    setMeta("name", "robots", config.defaultPublicRobots);
     setCanonical(path);
     setMeta("property", "og:locale", "nl_NL");
     setMeta("property", "og:site_name", config.siteName);
@@ -272,6 +286,7 @@
   };
 
   updateUrlBasedTags();
+  applyDefaultPublicRobots();
   initStaticStructuredData();
 
   if ((document.documentElement.dataset.seoKind || "") === "blog-post") {

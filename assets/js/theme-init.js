@@ -16,6 +16,7 @@
     { id: "main8", name: "Design 8", href: new URL("main8.css", cssBaseUrl).href }
   ];
   const storageKey = "volpa-active-style";
+  const debugQueryKeys = ["themepanel", "themePanel", "themedebug", "themeDebug", "debugtheme", "debugTheme"];
 
   window.VOLPA_THEME_STYLES = styles;
   window.VOLPA_THEME_STORAGE_KEY = storageKey;
@@ -23,17 +24,21 @@
   const styleMap = Object.fromEntries(styles.map((style) => [style.id, style]));
   const params = new URLSearchParams(window.location.search);
   const queryTheme = params.get("theme");
+  const isThemeDebug = debugQueryKeys.some((key) => params.get(key) === "1");
+  window.VOLPA_THEME_DEBUG = isThemeDebug;
 
   let activeId = styles[0].id;
 
   if (queryTheme && styleMap[queryTheme]) {
     activeId = queryTheme;
-    try {
-      window.localStorage.setItem(storageKey, activeId);
-    } catch (error) {
-      activeId = queryTheme;
+    if (isThemeDebug) {
+      try {
+        window.localStorage.setItem(storageKey, activeId);
+      } catch (error) {
+        activeId = queryTheme;
+      }
     }
-  } else {
+  } else if (isThemeDebug) {
     try {
       activeId = window.localStorage.getItem(storageKey) || styles[0].id;
     } catch (error) {

@@ -18,20 +18,20 @@
     <div class="admin-login-card">
       <div class="admin-kicker">Volpa · Admin</div>
       <h1>Beheer blogs en kerninformatie zonder direct in de broncode te werken.</h1>
-      <p>Dit paneel is voorlopig statisch. De login is daarom bewust simpel gehouden: een knop die het beheer opent. Publiceren gebeurt daarna via export en GitHub.</p>
+      <p>Dit paneel is voorlopig een exporttool. De login is daarom bewust simpel gehouden: een knop die het beheer opent. Publiceren gebeurt daarna handmatig via export, commit en GitHub Pages.</p>
       <button type="button" class="btn btn-primary" data-admin-login>Open adminpaneel</button>
-      <p class="admin-login-note">Na inloggen kun je bloginhoud beheren en een nieuwe versie van <code>arnoud-data.js</code> genereren.</p>
+      <p class="admin-login-note">Na openen kun je blogs beheren, een nieuw <code>blog-posts.txt</code> genereren en een bijgewerkte <code>arnoud-data.js</code> exporteren.</p>
       <a href="../index.html" class="btn btn-ghost">Terug naar site</a>
     </div>
   </section>
 
   <section class="admin-app" data-admin-app hidden>
     <header class="admin-topbar">
-      <div>
-        <div class="admin-kicker">Volpa · Admin</div>
-        <h1>Beheercentrum</h1>
-        <p>Wijzig blogs en Arnoud-data, kopieer of download de bijgewerkte bestanden en publiceer daarna via GitHub.</p>
-      </div>
+        <div>
+          <div class="admin-kicker">Volpa · Admin</div>
+          <h1>Beheercentrum</h1>
+          <p>Werk blogs en Arnoud-data hier bij, download of kopieer de nieuwe bestanden en publiceer die daarna zelf via GitHub.</p>
+        </div>
       <div class="admin-topbar-actions">
         <a href="../blog.html" class="btn btn-ghost">Bekijk blog</a>
         <a href="../index.html" class="btn btn-ghost">Bekijk site</a>
@@ -40,7 +40,7 @@
     </header>
 
     <div class="admin-notice">
-      <strong>Belangrijk:</strong> dit paneel schrijft voorlopig niets direct naar GitHub. Je gebruikt het om bijgewerkte bestanden te genereren, te kopiëren of te downloaden. Daarna commit en push je die bestanden.
+      <strong>Belangrijk:</strong> dit paneel publiceert niets direct. Gebruik het om bestanden te genereren, vervang daarna lokaal <code>content/blog-posts.txt</code> of <code>arnoud-data.js</code> en commit/push pas daarna de wijziging.
     </div>
 
     <section class="admin-section">

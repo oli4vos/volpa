@@ -13,6 +13,10 @@ const BLOG_SOURCE = "content/blog-posts.txt";
 let blogPostsPromise = null;
 
 function initStyleSwitcher() {
+  if (!window.VOLPA_THEME_DEBUG) {
+    return;
+  }
+
   const styles = Array.isArray(window.VOLPA_THEME_STYLES) && window.VOLPA_THEME_STYLES.length
     ? window.VOLPA_THEME_STYLES
     : [{ id: "main", name: "Basis", href: "assets/css/main.css" }];

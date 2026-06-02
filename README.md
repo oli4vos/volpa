@@ -1,6 +1,6 @@
 # Volpa — statische website
 
-Statische website zonder build-stap of dependencies. Alles draait direct in de browser.
+Statische website met lichte Node-buildscripts voor blogs, `sitemap.xml` en `llms.txt`. De publiekskant draait verder direct in de browser.
 
 ## Structuur
 
@@ -60,6 +60,15 @@ Open daarna:
 
 ```text
 http://127.0.0.1:8000/
+```
+
+## Build en validatie
+
+Gebruik deze commando's als je blogcontent, sitemap, `llms.txt` of formulierconfig hebt aangepast:
+
+```bash
+npm run validate:forms
+npm run build:static
 ```
 
 ## Publiceren via GitHub Pages
@@ -165,3 +174,30 @@ Controleer daarna minimaal:
 - homepageformulier op `index.html`
 
 Voor lokale tests zonder netwerk of mailclient kun je tijdelijk `mode: "test"` gebruiken in `assets/js/forms-config.js`.
+
+## Pre-live en livegang
+
+GitHub Pages is nu de staging/testomgeving:
+
+- publieke pagina's staan daarom tijdelijk op `noindex,follow`
+- `admin/` en `blog-aanleveren.html` blijven intern op `noindex,nofollow`
+- `robots.txt`, `sitemap.xml` en `llms.txt` blijven bestaan, maar zijn vooral voorbereidende infrastructuur
+
+Belangrijk voor intern designtesten:
+
+- `main.css` is de vaste publieksbasis
+- alternatieve designs blijven beschikbaar via querystring, bijvoorbeeld `?theme=main_small`
+- de zichtbare theme-switcher is verborgen op publieke pagina's
+- tijdelijk tonen kan met `?theme=main_small&themePanel=1`
+
+Bij livegang op `volpa.nl` of `www.volpa.nl` moeten deze stappen gebeuren:
+
+1. eigen domein koppelen
+2. `siteUrl` in `assets/js/seo-config.js` omzetten van `https://oli4vos.github.io/volpa/` naar het live domein
+3. `isStaging` op `false` zetten in `assets/js/seo-config.js`
+4. `npm run build:static` draaien om canonicals, statische blogs, `sitemap.xml` en `llms.txt` opnieuw te genereren
+5. controleren dat publieke pagina's weer op `index,follow` staan
+6. formulierendpoint kiezen en koppelen
+7. Search Console instellen
+8. analytics alleen toevoegen als privacy- en cookiekeuze helder is
+9. inhoudelijke eindcheck door Arnoud afronden
