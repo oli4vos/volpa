@@ -347,7 +347,7 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
       <small>begeleiding bij scheiding</small>
     </a>
     <nav class="nav-links">
-      <a href="../mediation.html">Mediation</a>
+      <a href="../mediation.html">Begeleiding</a>
       <a href="../financieel-advies.html">Financieel advies</a>
       <a href="../juridische-begeleiding.html">Juridische begeleiding</a>
       <a href="../over-arnoud.html">Over Arnoud</a>
@@ -381,10 +381,10 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
       <ul class="link-list">${renderRelatedPosts(post, posts)}</ul>
       <div class="cta-panel">
         <span class="cta-label">Vervolg</span>
-        <p class="cta-copy">Wilt u weten wat dit onderwerp in uw eigen situatie betekent? Gebruik dan het contactformulier voor een eerste verhelderend gesprek.</p>
+        <p class="cta-copy">Wilt u weten wat dit onderwerp in uw eigen situatie betekent? Gebruik dan het contactformulier voor een eerste verhelderend gesprek en een financieel compleet beeld.</p>
         <a href="../contact.html?type=kennismaking" class="btn btn-primary">Bespreek uw situatie</a>
       </div>
-      <div class="notice">Dit artikel is statisch gegenereerd vanuit <code>content/blog-posts.txt</code> en houdt dezelfde inhoudsbron aan als het bestaande blog.</div>
+      <div class="notice">Dit artikel hoort bij het publieke blogarchief van Volpa en sluit aan op de kennisbank en dienstpagina's.</div>
       <a href="../${escapeHtml(getBlogFallbackPath(post.slug))}" class="back-link">Fallback-versie openen</a>
     </aside>
   </div>
@@ -399,12 +399,12 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
           Volpa
           <small>begeleiding bij scheiding</small>
         </a>
-        <p>Volpa staat voor menselijke begeleiding bij scheiding. Mediation, financieel advies en juridische zorg - onder een dak, op jullie tempo.</p>
+        <p data-bind="footerPitch">Volpa is de financieel scheidingsspecialist bij scheiding met vermogen. Wij brengen voor beide partners het volledige financiële plaatje in kaart, zodat afspraken eerlijk, uitvoerbaar en toekomstbestendig worden.</p>
       </div>
       <div>
         <h5>Diensten</h5>
         <ul>
-          <li><a href="../mediation.html">Mediation</a></li>
+          <li><a href="../mediation.html">Begeleiding</a></li>
           <li><a href="../financieel-advies.html">Financieel advies</a></li>
           <li><a href="../juridische-begeleiding.html">Juridische begeleiding</a></li>
           <li><a href="../index.html#aanpak">Onze aanpak</a></li>
@@ -422,10 +422,10 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
       <div>
         <h5>Bereikbaar</h5>
         <ul data-bind-footer-contact>
-          <li>+31 (0)26 30 30 610</li>
-          <li>hallo@volpa.nl</li>
-          <li>Velperweg 21, Arnhem</li>
-          <li>Ma-do · 09-18u</li>
+          <li>+31 (0)6 51 21 47 52</li>
+          <li>arnoudvos@volpa.nl</li>
+          <li>Martinusweg 17, Zevenaar</li>
+          <li>Ma–Vr · 09:00 – 18:00 · avonden op afspraak</li>
         </ul>
       </div>
     </div>

@@ -304,16 +304,20 @@ function hydrateVolpaData() {
 
   const opleidingenElement = document.querySelector("[data-bind-opleidingen]");
   if (opleidingenElement && Array.isArray(data.opleidingen)) {
-    opleidingenElement.innerHTML = data.opleidingen.map((item) => (
-      `<li><span class="y">${item.jaar}</span>${item.titel}<span class="src">${item.instelling}</span></li>`
-    )).join("");
+    opleidingenElement.innerHTML = data.opleidingen.map((item) => {
+      const year = item && item.jaar ? `<span class="y">${item.jaar}</span>` : "";
+      const source = item && item.instelling ? `<span class="src">${item.instelling}</span>` : "";
+      return `<li>${year}${item.titel || ""}${source}</li>`;
+    }).join("");
   }
 
   const publicatiesElement = document.querySelector("[data-bind-publicaties]");
   if (publicatiesElement && Array.isArray(data.publicaties)) {
-    publicatiesElement.innerHTML = data.publicaties.map((item) => (
-      `<li><span class="y">${item.jaar}</span>${item.titel}<span class="src">${item.medium}</span></li>`
-    )).join("");
+    publicatiesElement.innerHTML = data.publicaties.map((item) => {
+      const year = item && item.jaar ? `<span class="y">${item.jaar}</span>` : "";
+      const source = item && item.medium ? `<span class="src">${item.medium}</span>` : "";
+      return `<li>${year}${item.titel || ""}${source}</li>`;
+    }).join("");
   }
 
   const phone = data.contact && data.contact.telefoon;
@@ -402,10 +406,21 @@ function initMobileNav() {
 
 function initReveal() {
   try {
-    if (!("IntersectionObserver" in window)) {
+    const elements = Array.from(document.querySelectorAll("section.block, .hero-stats, .hero-card, .content-card, .post-card, .lead-card, .proof-card, .conversion-card, .result-panel, .testimonial-panel"));
+    if (!elements.length) {
       return;
     }
 
+    const revealAll = () => {
+      elements.forEach((element) => element.classList.add("in"));
+    };
+
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      revealAll();
+      return;
+    }
+
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -413,16 +428,30 @@ function initReveal() {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.05 });
+    }, {
+      threshold: 0.08,
+      rootMargin: "0px 0px -8% 0px"
+    });
 
-    document.querySelectorAll("section.block, .hero-stats, .hero-card, .content-card, .post-card, .lead-card, .proof-card, .conversion-card, .result-panel, .testimonial-panel").forEach((element) => {
+    elements.forEach((element) => {
       element.classList.add("reveal");
+      if (element.getBoundingClientRect().top < viewportHeight * 1.08) {
+        window.requestAnimationFrame(() => element.classList.add("in"));
+        return;
+      }
+
       observer.observe(element);
     });
 
-    window.setTimeout(() => {
+    const revealPending = () => {
       document.querySelectorAll(".reveal:not(.in)").forEach((element) => element.classList.add("in"));
-    }, 4000);
+    };
+
+    window.addEventListener("load", () => {
+      window.setTimeout(revealPending, 250);
+    }, { once: true });
+
+    window.setTimeout(revealPending, 1200);
   } catch (error) {
     return;
   }
@@ -684,7 +713,7 @@ function renderBlogIndex(posts) {
         <article class="post-card">
           <div class="tag">Meer artikelen</div>
           <h3>Nog geen tweede artikel</h3>
-          <p>Zodra er nieuwe stukken in <code>content/blog-posts.txt</code> staan, verschijnen ze hier automatisch.</p>
+          <p>Nieuwe artikelen verschijnen hier zodra ze zijn gepubliceerd.</p>
         </article>
       `;
   }
@@ -710,9 +739,9 @@ function renderBlogPostPage(posts) {
       <a href="blog.html" class="back-link">← Terug naar blog</a>
       <div class="sec-num">Volpa · Blog</div>
       <h1 class="page-title">Nog geen artikel beschikbaar</h1>
-      <p class="page-intro">Zodra er iets in het blogbestand staat, wordt deze pagina automatisch gevuld.</p>
+      <p class="page-intro">Er is op dit moment nog geen artikel beschikbaar op deze pagina.</p>
     `;
-    contentElement.innerHTML = '<p>Voeg eerst een artikel toe via <code>content/blog-posts.txt</code> of via de aanleverpagina.</p>';
+    contentElement.innerHTML = "<p>Probeer het later opnieuw of keer terug naar het blogoverzicht.</p>";
     relatedElement.innerHTML = "";
     return;
   }
@@ -758,7 +787,7 @@ function renderBlogLoadError() {
       <a href="blog.html" class="back-link">← Terug naar blog</a>
       <div class="sec-num">Volpa · Blog</div>
       <h1 class="page-title">Blog kon niet laden</h1>
-      <p class="page-intro">Controleer of de site via een webserver draait en of <code>content/blog-posts.txt</code> bereikbaar is.</p>
+      <p class="page-intro">De bloginhoud kon op dit moment niet worden geladen. Probeer het later opnieuw.</p>
     `;
   }
 

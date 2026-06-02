@@ -309,8 +309,10 @@ function renderArnoudEditor() {
   form.querySelector('[name="bio"]').value = (data.bio || []).join("\n\n");
   form.querySelector('[name="specialisaties"]').value = (data.specialisaties || []).join("\n");
   form.querySelector('[name="ervaringJaren"]').value = data.stats && data.stats.ervaringJaren != null ? data.stats.ervaringJaren : "";
-  form.querySelector('[name="zonderRechterPct"]').value = data.stats && data.stats.zonderRechterPct != null ? data.stats.zonderRechterPct : "";
+  form.querySelector('[name="kennismakingKeuzePct"]').value = data.stats && data.stats.kennismakingKeuzePct != null ? data.stats.kennismakingKeuzePct : "";
   form.querySelector('[name="gesprekkenRange"]').value = data.stats && data.stats.gesprekkenRange ? data.stats.gesprekkenRange : "";
+  form.querySelector('[name="tevredenheidPct"]').value = data.stats && data.stats.tevredenheidPct != null ? data.stats.tevredenheidPct : "";
+  form.querySelector('[name="footerPitch"]').value = data.footerPitch || "";
 
   const contact = data.contact || {};
   form.querySelector('[name="telefoon"]').value = contact.telefoon || "";
@@ -336,6 +338,7 @@ function buildArnoudStateFromForm() {
   current.rol = form.querySelector('[name="rol"]').value.trim();
   current.werkgebied = form.querySelector('[name="werkgebied"]').value.trim();
   current.sinds = toNumberOrValue(form.querySelector('[name="sinds"]').value.trim());
+  current.footerPitch = form.querySelector('[name="footerPitch"]').value.trim();
   current.bio = splitParagraphs(form.querySelector('[name="bio"]').value);
   current.specialisaties = splitLines(form.querySelector('[name="specialisaties"]').value);
   current.contact = current.contact || {};
@@ -348,8 +351,9 @@ function buildArnoudStateFromForm() {
   current.contact.linkedin = form.querySelector('[name="linkedin"]').value.trim();
   current.stats = current.stats || {};
   current.stats.ervaringJaren = toNumberOrValue(form.querySelector('[name="ervaringJaren"]').value.trim());
-  current.stats.zonderRechterPct = toNumberOrValue(form.querySelector('[name="zonderRechterPct"]').value.trim());
+  current.stats.kennismakingKeuzePct = toNumberOrValue(form.querySelector('[name="kennismakingKeuzePct"]').value.trim());
   current.stats.gesprekkenRange = form.querySelector('[name="gesprekkenRange"]').value.trim();
+  current.stats.tevredenheidPct = toNumberOrValue(form.querySelector('[name="tevredenheidPct"]').value.trim());
 
   adminState.arnoud = current;
   return current;

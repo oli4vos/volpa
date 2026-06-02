@@ -18,15 +18,16 @@ window.VOLPA = {
 
   /* --- Persoonlijk --- */
   naam:        "Arnoud Vos",
-  rol:         "Oprichter · RFEA-echtscheidings adviseur · vFAS-lid",
-  werkgebied:  "Noord-Holland, Utrecht, Gelderland — online afspraken altijd mogelijk",
+  rol:         "Financieel scheidingsspecialist · Register Erkend Scheidingsadviseur (RES®) · Certified Financial Planner (CFP®)",
+  werkgebied:  "Primair regio Arnhem, Nijmegen en Doetinchem · landelijk voor ondernemers en DGA's",
   sinds:       2011,
+  footerPitch: "Volpa is de financieel scheidingsspecialist bij scheiding met vermogen. Wij brengen voor beide partners het volledige financiële plaatje in kaart, zodat afspraken eerlijk, uitvoerbaar en toekomstbestendig worden.",
 
   /* --- Bio: één paragraaf per regel --- */
   bio: [
-    "Ik ben Arnoud. Veertien jaar geleden begeleidde ik mijn eerste scheiding — toen al met de overtuiging dat je het op een nettere manier kunt doen dan de rechtszaal. Sindsdien heb ik honderden mensen door dit proces geholpen.",
-    "Mijn aanpak is rustig, helder en eerlijk. Ik geloof niet in trucjes, ik geloof in goede gesprekken, gedegen kennis en het lef om de moeilijke onderwerpen op tafel te leggen. Ook — en juist — als het schuurt.",
-    "Werkgebied: Gelderland en omstreken. Online afspraken zijn altijd mogelijk."
+    "Ik ben Arnoud Vos. Als financial planner met een sterk ontwikkelde expertise in scheidingsbegeleiding help ik beide partners om rust te krijgen in een periode waarin emoties en financiële gevolgen vaak door elkaar gaan lopen.",
+    "Volpa werkt niet als klassieke mediator die alleen vragen stelt en noteert. Ik adviseer actief, breng het volledige financiële plaatje in kaart en help mensen om beslissingen te nemen waar ze ook later nog achter kunnen staan.",
+    "Mijn werkgebied ligt primair in de regio Arnhem, Nijmegen en Doetinchem. Voor ondernemers, DGA's en andere specialistische dossiers werk ik ook landelijk en online."
   ],
 
   /* --- Contact --- */
@@ -44,38 +45,41 @@ window.VOLPA = {
      Wordt getoond op de "Over Arnoud"-sectie.
      `label` = kort kopje, `naam` = volledige naam */
   certificeringen: [
-    { label: "Registratie",            naam: "MfN-register Mediator",                            sinds: 2013, nummer: "MFN-2013-0814" },
-    { label: "Beroepsvereniging",      naam: "vFAS-aangesloten",                                  sinds: 2014 },
-    { label: "Financieel specialisme", naam: "RFEA — Register Financieel Echtscheidings Adviseur", sinds: 2016, nummer: "RFEA-1149" },
-    { label: "Internationaal",         naam: "ADR Mediator Certified",                            sinds: 2018 }
+    { label: "Beroepsregistratie", naam: "Register Erkend Scheidingsadviseur (RES®)" },
+    { label: "Financieel vakmanschap", naam: "Certified Financial Planner (CFP®)" },
+    { label: "Methodiek", naam: "Alimentatieberekeningen volgens Tremanormen via Split-Online.nl" },
+    { label: "Fiscale begeleiding", naam: "Eigen toolkit voor belastingaangifte in het scheidingsjaar" }
   ],
 
   /* --- Specialisaties (chips onder Over Arnoud) --- */
   specialisaties: [
-    "Familie & financiën",
-    "Ondernemers in scheiding",
-    "Co-ouderschap bij jonge kinderen",
-    "Internationale scheidingen"
+    "Scheiden met vermogen",
+    "Ondernemers en DGA's",
+    "Woning, uitkoop en hypotheek",
+    "Pensioen en alimentatie",
+    "Belastingaangifte scheidingsjaar",
+    "Second opinions en nazorg"
   ],
 
   /* --- Cijfers in de hero --- */
   stats: {
     ervaringJaren:      14,
-    zonderRechterPct:   96,
+    kennismakingKeuzePct: 97,
+    tevredenheidPct:    99,
     gesprekkenRange:    "4–6"
   },
 
   /* --- Opleidingen --- */
   opleidingen: [
-    { jaar: 2011, titel: "Master Notarieel Recht",            instelling: "Radboud Universiteit Nijmegen" },
-    { jaar: 2013, titel: "Opleiding tot MfN-mediator",        instelling: "Caleidoscoop Leertrajecten" },
-    { jaar: 2016, titel: "Postacademische opleiding RFEA",    instelling: "Erasmus Universiteit Rotterdam" }
+    { jaar: "", titel: "Bedrijfskundig geschoold", instelling: "" },
+    { jaar: "", titel: "Bedrijfseconomisch geschoold", instelling: "" },
+    { jaar: "", titel: "Permanent actief in financiële, fiscale en scheidingsspecifieke werkmethodiek", instelling: "" }
   ],
 
   /* --- Publicaties --- */
   publicaties: [
-    { jaar: 2022, titel: "De stille kosten van een vechtscheiding",    medium: "FD Persoonlijk" },
-    { jaar: 2024, titel: "Pensioenverevening na 2027 — wat verandert er?", medium: "Volpa blog" }
+    { jaar: "", titel: "Kennisartikelen over scheiden, vermogen, pensioen en belastingaangifte", medium: "Volpa kennisbank en blog" },
+    { jaar: "", titel: "Praktische tools en werkprocessen voor scheidingsdossiers", medium: "Interne Volpa-methodiek" }
   ]
 
 };
