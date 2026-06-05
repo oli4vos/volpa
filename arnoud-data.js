@@ -24,7 +24,7 @@ window.VOLPA = {
   /* --- Persoonlijk --- */
   naam:        "Arnoud Vos",
   rol:         "Financieel scheidingsspecialist · Register Erkend Scheidingsadviseur (RES®) · Certified Financial Planner (CFP®)",
-  werkgebied:  "Primair regio Arnhem, Nijmegen en Doetinchem · landelijk voor ondernemers en DGA's",
+  werkgebied:  "Primair regio Arnhem, Nijmegen en Doetinchem, landelijk voor complexe casuistiek · landelijk voor ondernemers en DGA's",
   sinds:       "", // Nog in te vullen
   footerPitch: "Volpa is de financieel scheidingsspecialist bij scheiding met vermogen. Wij brengen voor beide partners het volledige financiële plaatje in kaart, zodat afspraken eerlijk, uitvoerbaar en toekomstbestendig worden.",
 
