@@ -32,7 +32,7 @@ window.VOLPA = {
   bio: [
     "Ik ben Arnoud Vos. Als financial planner met een sterk ontwikkelde expertise in scheidingsbegeleiding help ik beide partners om rust te krijgen in een periode waarin emoties en financiële gevolgen vaak door elkaar gaan lopen.",
     "Volpa werkt niet als klassieke mediator die alleen vragen stelt en noteert. Ik adviseer actief, breng het volledige financiële plaatje in kaart en help mensen om beslissingen te nemen waar ze ook later nog achter kunnen staan.",
-    "Mijn werkgebied ligt primair in de regio Arnhem, Nijmegen en Doetinchem. Voor ondernemers, DGA's en andere specialistische dossiers werk ik ook landelijk en online."
+    "Mijn werkgebied ligt primair in de regio Arnhem, Nijmegen en Doetinchem. Voor ondernemers en DGA’s werk ik ook landelijk. In elk traject blijf ik het vaste aanspreekpunt, ook als een advocaat, fiscalist of hypotheekadviseur nodig is."
   ],
 
   /* --- Contact --- */
@@ -69,8 +69,8 @@ window.VOLPA = {
   /* --- Cijfers in de hero --- */
   stats: {
     ervaringJaren:      null, // Nog in te vullen
-    kennismakingKeuzePct: 97,
-    tevredenheidPct:    99,
+    kennismakingKeuzePct: null, // Cijfer uit vragenlijst; publicatie pas na controle van meetbasis
+    tevredenheidPct:    null, // Cijfer uit vragenlijst; publicatie pas na controle van meetbasis
     gesprekkenRange:    "2 inhoudelijke gesprekken + ondertekeningsafspraak"
   },
 

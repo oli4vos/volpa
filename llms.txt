@@ -4,9 +4,11 @@
 
 ## Belangrijkste pagina's
 
-[Home](https://oli4vos.github.io/volpa/): Introductie van Volpa en de combinatie van mediation, financiele begeleiding en juridische afwikkeling.
-[Mediation](https://oli4vos.github.io/volpa/mediation.html): Begeleiding bij gesprekken en afspraken rond scheiding.
+[Home](https://oli4vos.github.io/volpa/): Volpa als financieel scheidingsspecialist voor beide partners bij scheiding met vermogen.
+[Gezamenlijke begeleiding](https://oli4vos.github.io/volpa/mediation.html): Onpartijdige begeleiding met actieve financiele advisering.
 [Financieel advies](https://oli4vos.github.io/volpa/financieel-advies.html): Inzicht in woonlasten, alimentatie, pensioen, vermogen en haalbare afspraken.
+[Belastingaangifte scheidingsjaar](https://oli4vos.github.io/volpa/belastingaangifte-scheidingsjaar.html): Begeleiding bij de aangifte in het jaar van scheiding, inclusief fiscaal partnerschap, woning en toeslagen.
+[Scheiden als ondernemer](https://oli4vos.github.io/volpa/scheiden-als-ondernemer.html): Inzicht in ondernemingswaarde, inkomen, pensioen en fiscale gevolgen bij scheiding.
 [Juridische begeleiding](https://oli4vos.github.io/volpa/juridische-begeleiding.html): Afspraken, convenant, ouderschapsplan en juridische aandachtspunten.
 [Over Arnoud](https://oli4vos.github.io/volpa/over-arnoud.html): Achtergrond van Arnoud Vos en de werkwijze van Volpa.
 [Contact](https://oli4vos.github.io/volpa/contact.html): Contact opnemen voor een eerste gesprek.
@@ -26,7 +28,10 @@
 
 ## Blog
 
-[Wat kost een scheiding echt?](https://oli4vos.github.io/volpa/blog/wat-kost-een-scheiding-echt.html): Niet alleen de mediator telt mee. Ook woning, alimentatie, tempo en de gekozen route bepalen uiteindelijk wat een scheiding werkelijk kost.
+[Belastingaangifte in het scheidingsjaar: wat moet u samen bespreken?](https://oli4vos.github.io/volpa/blog/belastingaangifte-scheidingsjaar.html): Fiscaal partnerschap, woning, alimentatie en toeslagen kunnen in het scheidingsjaar samenkomen. Bespreek de gevolgen voordat u aangifte doet.
+[Pensioen bij scheiding: kijk verder dan het huidige inkomen](https://oli4vos.github.io/volpa/blog/pensioen-bij-scheiding.html): Pensioenafspraken lijken ver weg, maar bepalen voor beide partners een deel van hun latere inkomen. Breng rechten en keuzes tijdig in beeld.
+[Ondernemer en scheiding: welk inkomen en vermogen tellen mee?](https://oli4vos.github.io/volpa/blog/ondernemer-en-scheiding.html): Bij een onderneming zijn waarde, inkomen, schulden en continuïteit met elkaar verbonden. Beide partners hebben een volledig beeld nodig.
+[Wat kost een scheiding echt?](https://oli4vos.github.io/volpa/blog/wat-kost-een-scheiding-echt.html): De gratis kennismaking, het uurtarief en de benodigde analyse zijn verschillende onderdelen van de kosten. Bekijk wat een volledig traject beïnvloedt.
 [Wanneer werkt mediation wel en wanneer niet?](https://oli4vos.github.io/volpa/blog/wanneer-werkt-mediation.html): Mediation werkt vooral goed wanneer er nog genoeg bereidheid is om informatie te delen en besluiten te nemen. Volledige stilstand of onveiligheid vraagt vaak iets anders.
 [De woning bij scheiding: blijven, verkopen of wachten?](https://oli4vos.github.io/volpa/blog/woning-bij-scheiding.html): De woning is vaak meer dan een rekensom. Toch helpt het om scenario's nuchter naast elkaar te leggen voordat emoties de keuze helemaal overnemen.
 

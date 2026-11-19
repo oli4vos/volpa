@@ -9,9 +9,11 @@ const SITEMAP_PATH = path.join(ROOT_DIR, "sitemap.xml");
 const LLMS_PATH = path.join(ROOT_DIR, "llms.txt");
 
 const PRIMARY_PAGE_ENTRIES = [
-  { path: "", file: "index.html", label: "Home", llmsDescription: "Introductie van Volpa en de combinatie van mediation, financiele begeleiding en juridische afwikkeling." },
-  { path: "mediation.html", file: "mediation.html", label: "Mediation", llmsDescription: "Begeleiding bij gesprekken en afspraken rond scheiding." },
+  { path: "", file: "index.html", label: "Home", llmsDescription: "Volpa als financieel scheidingsspecialist voor beide partners bij scheiding met vermogen." },
+  { path: "mediation.html", file: "mediation.html", label: "Gezamenlijke begeleiding", llmsDescription: "Onpartijdige begeleiding met actieve financiele advisering." },
   { path: "financieel-advies.html", file: "financieel-advies.html", label: "Financieel advies", llmsDescription: "Inzicht in woonlasten, alimentatie, pensioen, vermogen en haalbare afspraken." },
+  { path: "belastingaangifte-scheidingsjaar.html", file: "belastingaangifte-scheidingsjaar.html", label: "Belastingaangifte scheidingsjaar", llmsDescription: "Begeleiding bij de aangifte in het jaar van scheiding, inclusief fiscaal partnerschap, woning en toeslagen." },
+  { path: "scheiden-als-ondernemer.html", file: "scheiden-als-ondernemer.html", label: "Scheiden als ondernemer", llmsDescription: "Inzicht in ondernemingswaarde, inkomen, pensioen en fiscale gevolgen bij scheiding." },
   { path: "juridische-begeleiding.html", file: "juridische-begeleiding.html", label: "Juridische begeleiding", llmsDescription: "Afspraken, convenant, ouderschapsplan en juridische aandachtspunten." },
   { path: "over-arnoud.html", file: "over-arnoud.html", label: "Over Arnoud", llmsDescription: "Achtergrond van Arnoud Vos en de werkwijze van Volpa." },
   { path: "contact.html", file: "contact.html", label: "Contact", llmsDescription: "Contact opnemen voor een eerste gesprek." }
@@ -407,6 +409,8 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
           <li><a href="../mediation.html">Begeleiding</a></li>
           <li><a href="../financieel-advies.html">Financieel advies</a></li>
           <li><a href="../juridische-begeleiding.html">Juridische begeleiding</a></li>
+          <li><a href="../belastingaangifte-scheidingsjaar.html">Belastingaangifte scheidingsjaar</a></li>
+          <li><a href="../scheiden-als-ondernemer.html">Scheiden als ondernemer</a></li>
           <li><a href="../index.html#aanpak">Onze aanpak</a></li>
         </ul>
       </div>
@@ -430,7 +434,7 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
       </div>
     </div>
     <div class="copyright">
-      <span>© 2026 Volpa B.V. · KvK 67891234</span>
+      <span>© 2026 Volpa</span>
       <span class="marks">
         <a href="../privacy.html">Privacy</a>
         <a href="../voorwaarden.html">Voorwaarden</a>

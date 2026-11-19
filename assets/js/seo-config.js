@@ -10,16 +10,18 @@
     siteName: "Volpa",
     defaultOgImagePath: "assets/img/og-default.svg",
     personName: "Arnoud Vos",
-    organizationDescription: "Volpa begeleidt mensen bij scheiding met aandacht voor rust, overzicht en financiele duidelijkheid.",
+    organizationDescription: "Volpa brengt bij scheiding met vermogen voor beide partners woning, pensioen, onderneming, alimentatie en fiscale gevolgen in kaart.",
     knowsAbout: [
       "Scheidingsbegeleiding",
-      "Mediation bij scheiding",
+      "Financieel scheidingsadvies",
       "Financiele begeleiding bij scheiding",
       "Alimentatie",
       "Ouderschapsplan",
       "Scheidingsconvenant",
       "Pensioen bij scheiding",
-      "Woning bij scheiding"
+      "Woning bij scheiding",
+      "Ondernemer en scheiding",
+      "Belastingaangifte scheidingsjaar"
     ]
   };
 
