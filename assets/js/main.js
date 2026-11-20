@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   hydrateVolpaData();
   initMobileNav();
   initFaq();
-  initReveal();
-  initSmoothScroll();
   initVolpaForms();
   initBlogSystem();
 });
@@ -13,13 +11,12 @@ const BLOG_SOURCE = "content/blog-posts.txt";
 let blogPostsPromise = null;
 
 function initStyleSwitcher() {
-  if (!window.VOLPA_THEME_DEBUG) {
-    return;
-  }
-
-  const styles = Array.isArray(window.VOLPA_THEME_STYLES) && window.VOLPA_THEME_STYLES.length
+  const availableStyles = Array.isArray(window.VOLPA_THEME_STYLES) && window.VOLPA_THEME_STYLES.length
     ? window.VOLPA_THEME_STYLES
-    : [{ id: "main", name: "Basis", href: "assets/css/main.css" }];
+    : [{ id: "main", name: "Huidige stijl", href: "assets/css/main.css" }];
+  const styles = window.VOLPA_THEME_DEBUG
+    ? availableStyles
+    : availableStyles.filter((style) => style.id === "main" || style.id === "main9");
   const storageKey = window.VOLPA_THEME_STORAGE_KEY || "volpa-active-style";
   const link = ensureStyleLink(styles);
 
@@ -41,7 +38,9 @@ function initStyleSwitcher() {
 
   const panel = document.createElement("div");
   panel.className = "style-switcher-panel";
+  panel.id = "volpa-style-options";
   panel.hidden = true;
+  trigger.setAttribute("aria-controls", panel.id);
 
   const title = document.createElement("div");
   title.className = "style-switcher-title";
@@ -53,12 +52,13 @@ function initStyleSwitcher() {
     button.type = "button";
     button.className = "style-switcher-option";
     button.dataset.styleId = style.id;
-    button.innerHTML = `<span>${escapeHtml(style.name)}</span><small>${escapeHtml(style.href.split("/").pop())}</small>`;
+    button.innerHTML = `<span>${escapeHtml(style.name)}</span>`;
     button.addEventListener("click", () => {
       applyStyle(style.id, styles, link, storageKey);
       syncStyleSwitcherState(styles, link, trigger, optionButtons);
       panel.hidden = true;
       trigger.setAttribute("aria-expanded", "false");
+      trigger.focus();
     });
     panel.appendChild(button);
     return button;
@@ -86,7 +86,8 @@ function initStyleSwitcher() {
 
   switcher.appendChild(trigger);
   switcher.appendChild(panel);
-  document.body.appendChild(switcher);
+  const footer = document.querySelector("footer .copyright") || document.querySelector("footer") || document.body;
+  footer.appendChild(switcher);
 
   syncStyleSwitcherState(styles, link, trigger, optionButtons);
 }
@@ -130,9 +131,9 @@ function syncStyleSwitcherState(styles, link, trigger, optionButtons) {
   const activeId = link.getAttribute("data-style-id") || styles[0].id;
   const active = styles.find((style) => style.id === activeId) || styles[0];
 
-  trigger.innerHTML = `<span>Design</span><span aria-hidden="true">▾</span>`;
-  trigger.setAttribute("aria-label", `Actief design: ${active.name}`);
-  trigger.setAttribute("title", `Actief design: ${active.name}`);
+  trigger.innerHTML = `<span>Stijl: ${escapeHtml(active.name)}</span><span aria-hidden="true">▾</span>`;
+  trigger.setAttribute("aria-label", `Actieve stijl: ${active.name}`);
+  trigger.setAttribute("title", `Actieve stijl: ${active.name}`);
 
   optionButtons.forEach((button) => {
     const isActive = button.dataset.styleId === active.id;
@@ -150,37 +151,39 @@ function injectStyleSwitcherStyles() {
   style.id = "style-switcher-styles";
   style.textContent = `
     .style-switcher {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 120;
+      position: relative;
+      display: inline-flex;
+      margin-left: auto;
+      z-index: 20;
       font-family: "Geist", -apple-system, system-ui, sans-serif;
+      font-size: 13px;
+      letter-spacing: normal;
+      text-transform: none;
     }
-
     .style-switcher-trigger,
     .style-switcher-option {
       appearance: none;
-      border: 1px solid rgba(20, 24, 28, 0.18);
-      background: rgba(252, 248, 240, 0.96);
-      color: #14181c;
-      box-shadow: 0 16px 40px -24px rgba(20, 24, 28, 0.42);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
+      border: 1px solid var(--line, #8c7b6e);
+      background: var(--paper, #fffdfa);
+      color: var(--ink, #352b27);
+      font: inherit;
+      box-shadow: none;
+      cursor: pointer;
     }
-
     .style-switcher-trigger {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      min-height: 40px;
-      padding: 0 14px;
-      border-radius: 999px;
-      font-size: 13px;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      cursor: pointer;
     }
-
+    .style-switcher-trigger:hover,
+    .style-switcher-option:hover {
+      background: var(--bg, #faf7f2);
+    }
     .style-switcher-panel {
       position: absolute;
       right: 0;
@@ -189,76 +192,43 @@ function injectStyleSwitcherStyles() {
       max-height: min(68vh, 460px);
       overflow-y: auto;
       overscroll-behavior: contain;
-      scrollbar-gutter: stable;
-      padding: 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(20, 24, 28, 0.12);
-      background: rgba(252, 248, 240, 0.98);
-      box-shadow: 0 20px 48px -30px rgba(20, 24, 28, 0.38);
-      -webkit-backdrop-filter: blur(18px);
-      backdrop-filter: blur(18px);
+      padding: 10px;
+      border: 1px solid var(--line, #8c7b6e);
+      border-radius: 14px;
+      background: var(--paper, #fffdfa);
+      box-shadow: 0 12px 32px rgba(53, 43, 39, .12);
     }
-
+    .style-switcher-panel[hidden] { display: none; }
     .style-switcher-title {
-      margin-bottom: 8px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #6a6b6c;
+      margin: 4px 6px 8px;
+      font-size: 12px;
+      color: var(--ink-3, #6d6057);
     }
-
     .style-switcher-option {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 3px;
+      align-items: center;
       width: 100%;
-      padding: 12px 14px;
-      border-radius: 14px;
-      cursor: pointer;
+      min-height: 44px;
+      padding: 10px 12px;
+      border-radius: 8px;
       text-align: left;
-      box-shadow: none;
     }
-
-    .style-switcher-option + .style-switcher-option {
-      margin-top: 8px;
-    }
-
-    .style-switcher-option small {
-      font-size: 11px;
-      color: #6a6b6c;
-      letter-spacing: 0.04em;
-    }
-
+    .style-switcher-option + .style-switcher-option { margin-top: 6px; }
     .style-switcher-option.active {
-      border-color: rgba(20, 24, 28, 0.4);
-      background: #14181c;
-      color: #fcfaf3;
+      border-color: var(--clay-deep, #8b4719);
+      background: var(--clay-deep, #8b4719);
+      color: #fff;
     }
-
-    .style-switcher-option.active small {
-      color: rgba(252, 250, 243, 0.72);
+    .style-switcher-trigger:focus-visible,
+    .style-switcher-option:focus-visible {
+      outline: 3px solid var(--clay-deep, #8b4719);
+      outline-offset: 3px;
     }
-
     @media (max-width: 720px) {
-      .style-switcher {
-        right: 12px;
-        bottom: calc(12px + env(safe-area-inset-bottom));
-      }
-
-      .style-switcher-panel {
-        width: min(220px, calc(100vw - 24px));
-        max-height: min(64vh, 400px);
-      }
-
-      .style-switcher-trigger {
-        min-height: 38px;
-        padding: 0 12px;
-        font-size: 12px;
-      }
+      .style-switcher { margin-left: 0; margin-top: 8px; }
+      .style-switcher-panel { right: auto; left: 0; }
     }
   `;
-
   document.head.appendChild(style);
 }
 
@@ -281,7 +251,7 @@ function hydrateVolpaData() {
   if (nameElement && data.naam) {
     const parts = data.naam.split(" ");
     const last = parts.pop();
-    nameElement.innerHTML = `${parts.join(" ")} <em>${last}</em>`;
+    nameElement.textContent = `${parts.join(" ")} ${last}`;
   }
 
   const bioElement = document.querySelector("[data-bind-bio]");
@@ -363,23 +333,24 @@ function hydrateVolpaData() {
 }
 
 function initFaq() {
-  document.querySelectorAll(".faq-item").forEach((item) => {
+  document.querySelectorAll(".faq-item").forEach((item, index) => {
     const question = item.querySelector(".faq-q");
     const answer = item.querySelector(".faq-a");
     if (!question || !answer) {
       return;
     }
 
-    question.addEventListener("click", () => {
-      const open = item.classList.contains("open");
-      if (open) {
-        answer.style.maxHeight = "0px";
-        item.classList.remove("open");
-        return;
-      }
+    answer.id = answer.id || `volpa-faq-answer-${index + 1}`;
+    question.setAttribute("aria-controls", answer.id);
+    question.setAttribute("aria-expanded", "false");
+    answer.hidden = true;
 
-      answer.style.maxHeight = `${answer.scrollHeight}px`;
-      item.classList.add("open");
+    question.addEventListener("click", () => {
+      const open = question.getAttribute("aria-expanded") === "true";
+      question.setAttribute("aria-expanded", String(!open));
+      item.classList.toggle("open", !open);
+      answer.hidden = open;
+      answer.style.maxHeight = open ? "0px" : `${answer.scrollHeight}px`;
     });
   });
 }
@@ -387,92 +358,43 @@ function initFaq() {
 function initMobileNav() {
   const nav = document.querySelector(".nav");
   const toggle = document.querySelector("[data-nav-toggle]");
+  const links = nav && nav.querySelector(".nav-links");
   if (!nav || !toggle) {
     return;
   }
 
+  if (links) {
+    links.id = links.id || "volpa-primary-nav";
+    toggle.setAttribute("aria-controls", links.id);
+  }
+
+  const closeMenu = () => {
+    nav.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+  };
+
   toggle.addEventListener("click", () => {
     const open = nav.classList.toggle("open");
     toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Sluit menu" : "Open menu");
   });
 
-  document.querySelectorAll(".nav-links a").forEach((link) => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    });
+  nav.querySelectorAll(".nav-links a, .nav-cta").forEach((link) => {
+    link.addEventListener("click", closeMenu);
   });
-}
 
-function initReveal() {
-  try {
-    const elements = Array.from(document.querySelectorAll("section.block, .hero-stats, .hero-card, .content-card, .post-card, .lead-card, .proof-card, .conversion-card, .result-panel, .testimonial-panel"));
-    if (!elements.length) {
-      return;
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && nav.classList.contains("open")) {
+      closeMenu();
+      toggle.focus();
     }
+  });
 
-    const revealAll = () => {
-      elements.forEach((element) => element.classList.add("in"));
-    };
-
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-      revealAll();
-      return;
+  document.addEventListener("click", (event) => {
+    if (nav.classList.contains("open") && !nav.contains(event.target)) {
+      closeMenu();
     }
-
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.08,
-      rootMargin: "0px 0px -8% 0px"
-    });
-
-    elements.forEach((element) => {
-      element.classList.add("reveal");
-      if (element.getBoundingClientRect().top < viewportHeight * 1.08) {
-        window.requestAnimationFrame(() => element.classList.add("in"));
-        return;
-      }
-
-      observer.observe(element);
-    });
-
-    const revealPending = () => {
-      document.querySelectorAll(".reveal:not(.in)").forEach((element) => element.classList.add("in"));
-    };
-
-    window.addEventListener("load", () => {
-      window.setTimeout(revealPending, 250);
-    }, { once: true });
-
-    window.setTimeout(revealPending, 1200);
-  } catch (error) {
-    return;
-  }
-}
-
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", (event) => {
-      const href = anchor.getAttribute("href");
-      if (!href || href.length < 2) {
-        return;
-      }
-
-      const target = document.querySelector(href);
-      if (!target) {
-        return;
-      }
-
-      event.preventDefault();
-      window.scrollTo({ top: target.offsetTop - 64, behavior: "smooth" });
-    });
   });
 }
 
@@ -737,7 +659,6 @@ function renderBlogPostPage(posts) {
     }
     heroElement.innerHTML = `
       <a href="blog.html" class="back-link">← Terug naar blog</a>
-      <div class="sec-num">Volpa · Blog</div>
       <h1 class="page-title">Nog geen artikel beschikbaar</h1>
       <p class="page-intro">Er is op dit moment nog geen artikel beschikbaar op deze pagina.</p>
     `;
@@ -756,7 +677,6 @@ function renderBlogPostPage(posts) {
 
   heroElement.innerHTML = `
     <a href="blog.html" class="back-link">← Terug naar blog</a>
-    <div class="sec-num">Volpa · Blog</div>
     <div class="blog-meta">
       <span>${escapeHtml(selectedPost.category)}</span>
       <span>${escapeHtml(formatBlogDate(selectedPost.date))}</span>
@@ -785,7 +705,6 @@ function renderBlogLoadError() {
   if (hero) {
     hero.innerHTML = `
       <a href="blog.html" class="back-link">← Terug naar blog</a>
-      <div class="sec-num">Volpa · Blog</div>
       <h1 class="page-title">Blog kon niet laden</h1>
       <p class="page-intro">De bloginhoud kon op dit moment niet worden geladen. Probeer het later opnieuw.</p>
     `;

@@ -336,9 +336,9 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script src="../assets/js/seo-config.js"></script>
-<script src="../assets/js/theme-init.js"></script>
+<script src="../assets/js/theme-init.js?v=20261120f"></script>
 <script src="../assets/js/seo.js"></script>
-<noscript><link rel="stylesheet" href="../assets/css/main.css" /></noscript>
+<noscript><link rel="stylesheet" href="../assets/css/main.css?v=20261120f" /></noscript>
 </head>
 <body>
 <header class="nav">
@@ -363,7 +363,6 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
 <section class="page-hero">
   <div class="container article-hero">
     <a href="../blog.html" class="back-link">&larr; Terug naar blog</a>
-    <div class="sec-num">Volpa · Blog</div>
     <div class="blog-meta">
       <span>${escapeHtml(post.category)}</span>
       <span>${escapeHtml(formatBlogDate(post.date))}</span>
@@ -401,7 +400,7 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
           Volpa
           <small>begeleiding bij scheiding</small>
         </a>
-        <p data-bind="footerPitch">Volpa is de financieel scheidingsspecialist bij scheiding met vermogen. Wij brengen voor beide partners het volledige financiële plaatje in kaart, zodat afspraken eerlijk, uitvoerbaar en toekomstbestendig worden.</p>
+        <p data-bind="footerPitch">Arnoud Vos begeleidt beide partners bij de financiële keuzes rond een scheiding. Hij brengt woning, inkomen, pensioen en vermogen in kaart en rekent de gevolgen van afspraken door.</p>
       </div>
       <div>
         <h5>Diensten</h5>
@@ -445,7 +444,7 @@ ${articlePublishedTime ? `<meta property="article:published_time" content="${esc
 </footer>
 
 <script src="../arnoud-data.js"></script>
-<script src="../assets/js/main.js"></script>
+<script src="../assets/js/main.js?v=20261120f"></script>
 </body>
 </html>
 `;

@@ -26,12 +26,12 @@ window.VOLPA = {
   rol:         "Financieel scheidingsspecialist · Register Erkend Scheidingsadviseur (RES®) · Certified Financial Planner (CFP®)",
   werkgebied:  "Primair regio Arnhem, Nijmegen en Doetinchem, landelijk voor complexe casuistiek · landelijk voor ondernemers en DGA's",
   sinds:       "", // Nog in te vullen
-  footerPitch: "Volpa is de financieel scheidingsspecialist bij scheiding met vermogen. Wij brengen voor beide partners het volledige financiële plaatje in kaart, zodat afspraken eerlijk, uitvoerbaar en toekomstbestendig worden.",
+  footerPitch: "Arnoud Vos begeleidt beide partners bij de financiële keuzes rond een scheiding. Hij brengt woning, inkomen, pensioen en vermogen in kaart en rekent de gevolgen van afspraken door.",
 
   /* --- Bio: één paragraaf per regel --- */
   bio: [
-    "Ik ben Arnoud Vos. Als financial planner met een sterk ontwikkelde expertise in scheidingsbegeleiding help ik beide partners om rust te krijgen in een periode waarin emoties en financiële gevolgen vaak door elkaar gaan lopen.",
-    "Volpa werkt niet als klassieke mediator die alleen vragen stelt en noteert. Ik adviseer actief, breng het volledige financiële plaatje in kaart en help mensen om beslissingen te nemen waar ze ook later nog achter kunnen staan.",
+    "Ik ben Arnoud Vos, financial planner en scheidingsadviseur. Ik help beide partners de financiële gevolgen van een scheiding te begrijpen voordat zij afspraken ondertekenen.",
+    "Ik kijk naar de woning, het inkomen, pensioen, vermogen en belasting. Waar keuzes van elkaar afhangen, reken ik verschillende mogelijkheden door en bespreek ik de uitkomst met u beiden.",
     "Mijn werkgebied ligt primair in de regio Arnhem, Nijmegen en Doetinchem. Voor ondernemers en DGA’s werk ik ook landelijk. In elk traject blijf ik het vaste aanspreekpunt, ook als een advocaat, fiscalist of hypotheekadviseur nodig is."
   ],
 
@@ -41,7 +41,7 @@ window.VOLPA = {
     telefoonLink:   "+31651214752",          // gebruikt voor tel:-link, geen spaties
     email:          "arnoudvos@volpa.nl",
     whatsapp:       "31651214752",           // landcode + nummer, zonder + of 0
-    adres:          "Martinusweg 17 — Zevenaar",
+    adres:          "Martinusweg 17, Zevenaar",
     bereikbaar:     "Ma–Vr · 09:00 – 18:00 Avonden op afspraak",
     linkedin:       "" // Nog in te vullen
   },

@@ -7,6 +7,7 @@
 ## Source Of Truth
 - Blogcontent: `content/blog-posts.txt`
 - Kerninformatie over Arnoud/Volpa: `arnoud-data.js`
+- Ontwerprichting en stijlkeuzes: `DESIGN.md`
 
 ## Generated Files
 - `blog/*.html`
@@ -18,6 +19,7 @@
 - Lokale server: `python3 -m http.server 8000`
 - Open lokaal: `http://127.0.0.1:8000/`
 - Build alles opnieuw: `npm run build:static`
+- Stijlaudit: `npm run audit:style`
 
 ## Validation
 - Gebruik `node --check` voor gewijzigde JS-bestanden, vooral:

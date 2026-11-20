@@ -22,9 +22,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script src="assets/js/seo-config.js"></script>
-<script src="assets/js/theme-init.js"></script>
+<script src="assets/js/theme-init.js?v=20261120f"></script>
 <script src="assets/js/seo.js"></script>
-<noscript><link rel="stylesheet" href="assets/css/main.css" /></noscript>
+<noscript><link rel="stylesheet" href="assets/css/main.css?v=20261120f" /></noscript>
 </head>
 <body>
 <header class="nav">
@@ -48,8 +48,7 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="sec-num">Volpa · Bedankt</div>
-    <h1 class="page-title" data-thank-you-title>Bedankt voor uw <em>aanvraag</em>.</h1>
+    <h1 class="page-title" data-thank-you-title>Bedankt voor uw aanvraag.</h1>
     <p class="page-intro" data-thank-you-intro>Als uw mailprogramma is geopend, kunt u de aanvraag daar verzenden. Is het formulier rechtstreeks verwerkt, dan neemt Volpa contact met u op om de vraag verder te bespreken.</p>
   </div>
 </section>
@@ -81,7 +80,7 @@
           Volpa
           <small>begeleiding bij scheiding</small>
         </a>
-        <p data-bind="footerPitch">Volpa is de financieel scheidingsspecialist bij scheiding met vermogen. Wij brengen voor beide partners het volledige financiële plaatje in kaart, zodat afspraken eerlijk, uitvoerbaar en toekomstbestendig worden.</p>
+        <p data-bind="footerPitch">Arnoud Vos begeleidt beide partners bij de financiële keuzes rond een scheiding. Hij brengt woning, inkomen, pensioen en vermogen in kaart en rekent de gevolgen van afspraken door.</p>
       </div>
       <div>
         <h5>Diensten</h5>
@@ -130,19 +129,19 @@
     const form = new URLSearchParams(window.location.search).get("form") || "";
     const variants = {
       contact: {
-        title: "Bedankt voor uw <em>bericht</em>.",
+        title: "Bedankt voor uw bericht.",
         intro: "Uw contactaanvraag staat klaar of is verwerkt. Volpa gebruikt uw bericht om uw vraag te beoordelen en een passende vervolgstap te bepalen.",
         heading: "Wat er nu gebeurt",
         copy: "Bij het contactformulier is het doel om uw situatie eerst goed te begrijpen. Deel aanvullende gevoelige documenten liever pas nadat duidelijk is welke vervolgstap passend is."
       },
       lead: {
-        title: "Bedankt voor uw <em>intakeaanvraag</em>.",
+        title: "Bedankt voor uw intakeaanvraag.",
         intro: "Uw korte intakeaanvraag staat klaar of is verwerkt. Volpa neemt contact op om te bespreken welke vorm van begeleiding het best aansluit bij uw vraag.",
         heading: "De volgende stap",
         copy: "Het intakeformulier is bewust kort gehouden. Wilt u later nog meer context geven, dan kan dat altijd via de contactpagina."
       },
       homepage: {
-        title: "Bedankt voor uw <em>aanvraag</em>.",
+        title: "Bedankt voor uw aanvraag.",
         intro: "Uw aanvraag vanaf de homepage staat klaar of is verwerkt. Volpa gebruikt deze informatie om contact met u op te nemen over uw vraag.",
         heading: "Wat u kunt verwachten",
         copy: "Volpa reageert op basis van de informatie die u heeft achtergelaten. Houd het vervolg liever praktisch en deel gevoelige stukken pas als daar expliciet om wordt gevraagd."
@@ -165,6 +164,6 @@
     if (copy) copy.textContent = active.copy;
   })();
 </script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=20261120f"></script>
 </body>
 </html>

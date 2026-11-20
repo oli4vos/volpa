@@ -5,7 +5,7 @@
   const cssBaseUrl = new URL("../css/", scriptUrl);
 
   const styles = [
-    { id: "main", name: "Basis", href: new URL("main.css", cssBaseUrl).href },
+    { id: "main", name: "Huidige stijl", href: new URL("main.css?v=20261120f", cssBaseUrl).href },
     { id: "main_small", name: "Basis rustig", href: new URL("main_small.css", cssBaseUrl).href },
     { id: "main2", name: "Alternatief", href: new URL("main2.css", cssBaseUrl).href },
     { id: "main3", name: "Design 3", href: new URL("main3.css", cssBaseUrl).href },
@@ -13,7 +13,8 @@
     { id: "main5", name: "Design 5", href: new URL("main5.css", cssBaseUrl).href },
     { id: "main6", name: "Design 6", href: new URL("main6.css", cssBaseUrl).href },
     { id: "main7", name: "Design 7", href: new URL("main7.css", cssBaseUrl).href },
-    { id: "main8", name: "Design 8", href: new URL("main8.css", cssBaseUrl).href }
+    { id: "main8", name: "Design 8", href: new URL("main8.css", cssBaseUrl).href },
+    { id: "main9", name: "Atelier", href: new URL("main9.css?v=20261120f", cssBaseUrl).href }
   ];
   const storageKey = "volpa-active-style";
   const debugQueryKeys = ["themepanel", "themePanel", "themedebug", "themeDebug", "debugtheme", "debugTheme"];
@@ -28,21 +29,23 @@
   window.VOLPA_THEME_DEBUG = isThemeDebug;
 
   let activeId = styles[0].id;
+  try {
+    const savedId = window.localStorage.getItem(storageKey);
+    if (savedId === "main" || savedId === "main9" || (isThemeDebug && styleMap[savedId])) {
+      activeId = savedId;
+    }
+  } catch (error) {
+    // Private browsing may block local storage; the default still works.
+  }
 
   if (queryTheme && styleMap[queryTheme]) {
     activeId = queryTheme;
-    if (isThemeDebug) {
+    if (isThemeDebug || queryTheme === "main" || queryTheme === "main9") {
       try {
         window.localStorage.setItem(storageKey, activeId);
       } catch (error) {
         activeId = queryTheme;
       }
-    }
-  } else if (isThemeDebug) {
-    try {
-      activeId = window.localStorage.getItem(storageKey) || styles[0].id;
-    } catch (error) {
-      activeId = styles[0].id;
     }
   }
 
