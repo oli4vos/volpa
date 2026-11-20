@@ -3,9 +3,19 @@
     ? new URL(document.currentScript.src, window.location.href)
     : new URL("assets/js/theme-init.js", window.location.href);
   const cssBaseUrl = new URL("../css/", scriptUrl);
+  const faviconUrl = new URL("../img/volpa-favicon.svg", scriptUrl);
+
+  let favicon = document.querySelector('link[rel="icon"]');
+  if (!favicon) {
+    favicon = document.createElement("link");
+    favicon.rel = "icon";
+    document.head.appendChild(favicon);
+  }
+  favicon.type = "image/svg+xml";
+  favicon.href = faviconUrl.href;
 
   const styles = [
-    { id: "main", name: "Huidige stijl", href: new URL("main.css?v=20261120f", cssBaseUrl).href },
+    { id: "main", name: "Huidige stijl", href: new URL("main.css?v=20261120h", cssBaseUrl).href },
     { id: "main_small", name: "Basis rustig", href: new URL("main_small.css", cssBaseUrl).href },
     { id: "main2", name: "Alternatief", href: new URL("main2.css", cssBaseUrl).href },
     { id: "main3", name: "Design 3", href: new URL("main3.css", cssBaseUrl).href },
@@ -14,7 +24,7 @@
     { id: "main6", name: "Design 6", href: new URL("main6.css", cssBaseUrl).href },
     { id: "main7", name: "Design 7", href: new URL("main7.css", cssBaseUrl).href },
     { id: "main8", name: "Design 8", href: new URL("main8.css", cssBaseUrl).href },
-    { id: "main9", name: "Atelier", href: new URL("main9.css?v=20261120f", cssBaseUrl).href }
+    { id: "main9", name: "Atelier", href: new URL("main9.css?v=20261120h", cssBaseUrl).href }
   ];
   const storageKey = "volpa-active-style";
   const debugQueryKeys = ["themepanel", "themePanel", "themedebug", "themeDebug", "debugtheme", "debugTheme"];

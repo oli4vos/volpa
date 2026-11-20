@@ -25,6 +25,7 @@ De site houdt twee selecteerbare stijlen: `assets/css/main.css` (**Huidige stijl
 - Ankers houden ruimte vrij voor de vaste navigatie. Veelgestelde vragen melden hun open status aan hulptechnologie. Het mobiele menu sluit met Escape, buitenklik en na navigatie.
 - Op mobiel blijft de vaste header één rij hoog. De primaire actie staat in het geopende menu; op de homepage en contactpagina staat de directe actie bij de inhoud. Zo neemt navigatie minder schermruimte in en verschijnt dezelfde knop niet twee keer boven elkaar.
 - Processtappen staan samen in één rustig paneel. Alle stappen gebruiken dezelfde binnenmarge van 40 px op desktop en 24 px op mobiel, zodat geen kolom hard tegen de buitenlijn begint.
+- De favicon naast de URL is een rond, klein beeldmerk op basis van de koperkleurige vos-pennenstreek. De vaste navigatie en footer tonen het volledige officiële woordmerk.
 
 ## Inhoud
 - Schrijf in de termen van bezoekers: woning, hypotheek, inkomen, pensioen, alimentatie, onderneming, belasting, convenant.
